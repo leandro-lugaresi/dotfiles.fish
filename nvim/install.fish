@@ -11,5 +11,4 @@ if command -qs cargo
     cargo install tree-sitter-cli &>/dev/null
 end
 
-# update plugins
-nvim --headless "+Lazy! sync" +qa &>/dev/null
+

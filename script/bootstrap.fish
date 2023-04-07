@@ -86,6 +86,14 @@ function link_file -d "links a file keeping a backup"
 		or abort "could not link $old to $new"
 end
 
+function installNvChad
+  if not test -d ~/.config/nvim
+    git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+    and success "NvChad installled"
+    or abort "failed to install NvChad"
+  end
+end
+
 function install_dotfiles
 	for src in $DOTFILES_ROOT/*/*.symlink
 		link_file $src $HOME/.(basename $src .symlink) backup
@@ -108,7 +116,7 @@ function install_dotfiles
 		or abort kitty
 	link_file $DOTFILES_ROOT/wezterm $HOME/.config/wezterm backup
 		or abort wezterm
-	link_file $DOTFILES_ROOT/nvim/config $HOME/.config/nvim backup
+	link_file $DOTFILES_ROOT/nvim/custom $HOME/.config/nvim/lua/custom backup
 		or abort nvim
 	link_file $DOTFILES_ROOT/yamllint/config $HOME/.config/yamllint/config backup
 		or abort yamllint
@@ -117,6 +125,10 @@ end
 curl -sL git.io/fisher | source && fisher install jorgebucaran/fisher
 	and success 'fisher'
 	or abort 'fisher'
+
+installNvChad
+  and success 'NvChad'
+  or abort 'NvChad'
 
 setup_gitconfig
 	and success 'gitconfig'
