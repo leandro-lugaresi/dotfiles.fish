@@ -1,14 +1,12 @@
 <p align="center">
-  <img alt="header image" src="https://raw.githubusercontent.com/caarlos0/dotfiles.fish/master/docs/header.svg" height="350" />
-  <h2 align="center">carlos' dotfiles</h2>
+  <img alt="header image" src="https://raw.githubusercontent.com/leandro-lugaresi/dotfiles.fish/master/docs/header.svg" height="350" />
+  <h2 align="center">Leandro' dotfiles</h2>
   <p align="center">Config files for Fish, Go, Editors, Terminals and more.</p>
 </p>
 
 ---
 
-Forked from my [ZSH dotfiles](https://github.com/caarlos0/dotfiles), these are
-my Fish Shell config files, together with editor, macOS configs and other
-goodies.
+Forked from my [caarlos0 dotfiles.fish](https://github.com/caarlos0/dotfiles.fish), thanks for this amazing repository.
 
 ## Installation
 
@@ -27,7 +25,7 @@ First, make sure you have all the following installed:
 Then, run these steps:
 
 ```console
-git clone https://github.com/caarlos0/dotfiles.fish.git ~/.dotfiles
+git clone https://github.com/leandro-lugaresi/dotfiles.fish.git ~/.dotfiles
 cd ~/.dotfiles
 ./script/bootstrap.fish
 ```
