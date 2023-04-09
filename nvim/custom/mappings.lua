@@ -55,6 +55,22 @@ M.harpoon = {
       '<cmd>Telescope harpoon marks<cr>',
       "Harppon search files",
     },
+    ["<A-a>"] = {
+      '<cmd>lua require("harpoon.ui").nav_file(1)<cr>',
+      "Harppon go to file 1",
+    },
+    ["<A-r>"] = {
+      '<cmd>lua require("harpoon.ui").nav_file(2)<cr>',
+      "Harppon go to file 2",
+    },
+    ["<A-s>"] = {
+      '<cmd>lua require("harpoon.ui").nav_file(3)<cr>',
+      "Harppon go to file 3",
+    },
+    ["<A-t>"] = {
+      '<cmd>lua require("harpoon.ui").nav_file(4)<cr>',
+      "Harppon go to file 4",
+    },
     ["<leader>me"] = {
       '<cmd>lua require("harpoon.ui").toggle_quick_menu()',
       "Edit harppon files",
