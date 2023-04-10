@@ -15,14 +15,14 @@ local plugins = {
           require "custom.configs.null-ls"
         end,
       },
+      { "simrat39/inlay-hints.nvim"},
     },
     config = function()
       require "plugins.configs.lspconfig"
       require "custom.configs.lspconfig"
-    end, -- Override to setup mason-lspconfig
+    end,
   },
 
-  -- override plugin configs
   {
     "williamboman/mason.nvim",
     opts = overrides.mason,
@@ -68,23 +68,18 @@ local plugins = {
       require "custom.configs.harpoon"
     end,
   },
-  { "kylechui/nvim-surround" },
+  { "kylechui/nvim-surround", lazy = false },
   { "nvim-treesitter/nvim-treesitter-textobjects" },
-  -- {"LukasPietzschmann/telescope-tabs"},
   {
     "jinh0/eyeliner.nvim",
+    lazy = false,
     config = function()
       require("eyeliner").setup {
         highlight_on_key = true,
+        dim = true
       }
     end,
   },
-
-  -- To make a plugin not be loaded
-  -- {
-  --   "NvChad/nvim-colorizer.lua",
-  --   enabled = false
-  -- },
 }
 
 return plugins

@@ -72,8 +72,29 @@ M.harpoon = {
       "Harppon go to file 4",
     },
     ["<leader>me"] = {
-      '<cmd>lua require("harpoon.ui").toggle_quick_menu()',
+      '<cmd>lua require("harpoon.ui").toggle_quick_menu()<cr>',
       "Edit harppon files",
+    },
+  }
+}
+
+M.lspconfig = {
+  n = {
+    ["<C-h>"] = {
+      "<cmd>Telescope lsp_document_symbols ignore_symbols=variable <cr>",
+      "lsp document symbols",
+    },
+    ["<leader>cl"] = {
+      function()
+        vim.lsp.codelens.run()
+      end,
+      "lsp codelens",
+    },
+    ["<leader>lr"] = {
+      function()
+        vim.cmd.LspRestart()
+      end,
+      "lsp restart",
     },
   }
 }
