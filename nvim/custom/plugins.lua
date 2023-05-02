@@ -1,4 +1,4 @@
-local overrides = require "custom.configs.overrides"
+local overrides = require("custom.configs.overrides")
 
 ---@type NvPluginSpec[]
 local plugins = {
@@ -12,14 +12,14 @@ local plugins = {
       {
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
-          require "custom.configs.null-ls"
+          require("custom.configs.null-ls")
         end,
       },
-      { "simrat39/inlay-hints.nvim"},
+      { "simrat39/inlay-hints.nvim" },
     },
     config = function()
-      require "plugins.configs.lspconfig"
-      require "custom.configs.lspconfig"
+      require("plugins.configs.lspconfig")
+      require("custom.configs.lspconfig")
     end,
   },
 
@@ -39,8 +39,8 @@ local plugins = {
   },
 
   {
-   "nvim-telescope/telescope.nvim",
-   opts = overrides.telescope,
+    "nvim-telescope/telescope.nvim",
+    opts = overrides.telescope,
   },
 
   {
@@ -55,29 +55,55 @@ local plugins = {
     "Pocco81/TrueZen.nvim",
     cmd = { "TZAtaraxis", "TZMinimalist" },
     config = function()
-      require "custom.configs.truezen"
+      require("custom.configs.truezen")
     end,
   },
 
-  { "f-person/git-blame.nvim" },
+  { "f-person/git-blame.nvim", lazy = false },
   { "folke/zen-mode.nvim" },
-  { "lvimuser/lsp-inlayhints.nvim" },
   {
     "ThePrimeagen/harpoon",
     config = function()
-      require "custom.configs.harpoon"
+      require("custom.configs.harpoon")
     end,
   },
   { "kylechui/nvim-surround", lazy = false },
+  { "kdheepak/lazygit.nvim", lazy = false },
   { "nvim-treesitter/nvim-treesitter-textobjects" },
   {
     "jinh0/eyeliner.nvim",
-    lazy = false,
+    lazy = true,
     config = function()
-      require("eyeliner").setup {
+      require("eyeliner").setup({
         highlight_on_key = true,
-        dim = true
-      }
+        dim = true,
+      })
+    end,
+  },
+
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    build = ":Copilot auth",
+    opts = {
+      suggestion = { enabled = true },
+      panel = { enabled = true },
+    },
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+    dependencies = "copilot.lua",
+    opts = {},
+    config = function(_, opts)
+      local copilot_cmp = require("copilot_cmp")
+      copilot_cmp.setup(opts)
+      -- attach cmp source whenever copilot attaches
+      -- fixes lazy-loading issues with the copilot cmp source
+      require("lazyvim.util").on_attach(function(client)
+        if client.name == "copilot" then
+          copilot_cmp._on_insert_enter()
+        end
+      end)
     end,
   },
 }

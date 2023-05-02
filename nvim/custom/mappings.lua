@@ -6,15 +6,17 @@ M.general = {
   n = {
     [";"] = { ":", "enter command mode", opts = { nowait = true } },
     -- Move selected lines beween lines
-    ["J"] = {"mzJ`z", opts = opts },
-    ["<C-d>"] = {"<C-d>zz", opts = opts },
-    ["<C-u>"] = { "<C-u>zz", opts = opts},
-    ["n"] = {"nzzzv", opts = opts},
-    ["N"] = {"Nzzzvr", opts = opts},
-    ["<A-n>"] = { ":bprev<CR>", "previous buffer", opts = opts},
-    ["<A-e>"] = { ":bnext<CR>", "next buffer", opts = opts},
-    ["<leader>s"] = { ":w<cr>", "save buffer", opts = { nowait = true }},
-    ["<leader>fb"] = { "<cmd>Telescope buffers<cr>", "find buffers", opts = { nowait = true }},
+    ["J"] = { "mzJ`z", opts = opts },
+    ["<C-d>"] = { "<C-d>zz", opts = opts },
+    ["<C-u>"] = { "<C-u>zz", opts = opts },
+    ["n"] = { "nzzzv", opts = opts },
+    ["N"] = { "Nzzzvr", opts = opts },
+    ["<A-n>"] = { ":bprev<CR>", "previous buffer", opts = opts },
+    ["<A-e>"] = { ":bnext<CR>", "next buffer", opts = opts },
+    ["<leader>cf"] = { ":let @+ = expand(\"%\")<CR>", "copy relative path", opts = opts },
+    ["<leader>s"] = { ":w<cr>", "save buffer", opts = { nowait = true } },
+    ["<leader>fb"] = { "<cmd>Telescope buffers<cr>", "find buffers", opts = { nowait = true } },
+    ["<leader>gg"] = { "<cmd>LazyGit<cr>", "open lazygit", opts = { nowait = true } },
   },
   v = {
     ["J"] = { ":m '>+1<CR>gv=gv", "move selected line down", opts = opts },
@@ -25,10 +27,10 @@ M.general = {
 M.truezen = {
   -- plugin = true,
   n = {
-    ["<leader>tz"] = { ":TZAtaraxis<CR>", opts = { nowait = true }},
+    ["<leader>tz"] = { ":TZAtaraxis<CR>", opts = { nowait = true } },
   },
   v = {
-    ["<leader>tz"] = { ":'<,'>TZNarrow<CR>", opts = { nowait = true }},
+    ["<leader>tz"] = { ":'<,'>TZNarrow<CR>", opts = { nowait = true } },
   }
 }
 
