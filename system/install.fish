@@ -31,4 +31,8 @@ if command -qs fzf
 		--color=bg:#000000,bg+:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
 		--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
 		--color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+    set -Ux FZF_FIND_FILE_COMMAND "fd --hidden --no-ignore-vcs --exclude .git . \$dir"
+    set -Ux FZF_CD_COMMAND "fd --type d"
+    set -Ux FZF_CD_WITH_HIDDEN_COMMAND "fd --hidden --no-ignore-vcs --exclude .git --type d"
+
 end
