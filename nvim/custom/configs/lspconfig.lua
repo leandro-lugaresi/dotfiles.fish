@@ -143,6 +143,7 @@ local servers = {
   "golangci_lint_ls",
   "bashls",
   "jsonls",
+  "pyright",
 }
 
 for _, lsp in ipairs(servers) do
