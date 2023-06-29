@@ -4,6 +4,13 @@ local overrides = require("custom.configs.overrides")
 local plugins = {
 
   -- Override plugin definition options
+  {
+    "NvChad/base46",
+    branch = "dev",
+    build = function()
+      require("base46").load_all_highlights()
+    end,
+  },
 
   {
     "neovim/nvim-lspconfig",
@@ -86,25 +93,20 @@ local plugins = {
     cmd = "Copilot",
     build = ":Copilot auth",
     opts = {
-      suggestion = { enabled = true },
-      panel = { enabled = true },
+      suggestion = {
+        enabled = true,
+        auto_trigger = true,
+        keymap = {
+          accept = "<M-l>",
+          accept_word = false,
+          accept_line = false,
+          next = "<M-]>",
+          prev = "<M-[>",
+          dismiss = "<C-]>",
+        },
+      },
+      panel = { enabled = false },
     },
-  },
-  {
-    "zbirenbaum/copilot-cmp",
-    dependencies = "copilot.lua",
-    opts = {},
-    config = function(_, opts)
-      local copilot_cmp = require("copilot_cmp")
-      copilot_cmp.setup(opts)
-      -- attach cmp source whenever copilot attaches
-      -- fixes lazy-loading issues with the copilot cmp source
-      require("lazyvim.util").on_attach(function(client)
-        if client.name == "copilot" then
-          copilot_cmp._on_insert_enter()
-        end
-      end)
-    end,
   },
 }
 
