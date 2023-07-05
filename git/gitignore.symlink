@@ -17,3 +17,4 @@ coverage.out
 coverage.txt
 .luarc.json
 *.log
+Procfile.local
