@@ -95,7 +95,8 @@ brew install \
   kubectx \
   neovim \
   starship \
-  zoxide
+  zoxide \
+  wezterm
 ```
 
 On Ubuntu:
