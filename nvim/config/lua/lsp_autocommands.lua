@@ -73,7 +73,7 @@ M.on_attach = function(client, bufnr)
     })
   end
 
-  if client.server_capabilities.codeLensProvider and vim.bo.filetype ~= "lua" then
+  if client.server_capabilities.codeLensProvider then
     vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
       buffer = bufnr,
       callback = function()
