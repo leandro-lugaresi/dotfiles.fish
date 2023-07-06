@@ -159,6 +159,7 @@ return {
       require("user.fugitive")
     end,
   },
+  { "f-person/git-blame.nvim", event = "VeryLazy" },
   {
     "mbbill/undotree",
     cmd = "UndotreeToggle",
@@ -175,7 +176,7 @@ return {
     "nvim-tree/nvim-tree.lua",
     cmd = "NvimTreeToggle",
     keys = {
-      { "<leader>tv", "<cmd>NvimTreeFocus<cr>", noremap = true, silent = true, desc = "nvim-tree Focus" },
+      { "<leader>tv", "<cmd>NvimTreeFindFileToggle<cr>", noremap = true, silent = true, desc = "nvim-tree Focus" },
       { "<leader>tc", "<cmd>NvimTreeClose<cr>", noremap = true, silent = true, desc = "nvim-tree Close" },
     },
     dependencies = {
