@@ -39,6 +39,7 @@ keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
 -- save and quit
 keymap("n", "<leader>w", ":write<CR>", opts)
+keymap("n", "<leader>s", ":write<CR>", opts)
 
 -- paste over without replacing default register
 keymap("n", "<leader>p", '"_dP', opts)
