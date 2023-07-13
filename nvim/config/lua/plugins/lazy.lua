@@ -54,6 +54,16 @@ return {
         desc = "Flash",
       },
       {
+        "<c-s>",
+        mode = { "n", "x", "o" },
+        function()
+          require("flash").jump({
+            pattern = vim.fn.expand("<cword>"),
+          })
+        end,
+        desc = "Flash word",
+      },
+      {
         "S",
         mode = { "n", "o", "x" },
         function()
@@ -76,14 +86,6 @@ return {
           require("flash").treesitter_search()
         end,
         desc = "Flash Treesitter Search",
-      },
-      {
-        "<c-s>",
-        mode = { "c" },
-        function()
-          require("flash").toggle()
-        end,
-        desc = "Toggle Flash Search",
       },
     },
   },
