@@ -96,7 +96,11 @@ brew install \
   neovim \
   starship \
   zoxide \
-  wezterm
+  wezterm \
+  ripgrep \
+  gpg2 \
+  gnupg\
+  pinentry-mac
 ```
 
 On Ubuntu:
@@ -119,7 +123,7 @@ And logging out and in again or restart.
 
 ## Themes and fonts
 
-*Catppuccin Mocha* and *MonoLisa* Font.
+_Catppuccin Mocha_ and _FiraCode_ Font.
 
 ## Screenshots
 
