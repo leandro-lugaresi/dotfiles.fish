@@ -99,8 +99,9 @@ brew install \
   wezterm \
   ripgrep \
   gpg2 \
-  gnupg\
-  pinentry-mac
+  gnupg \
+  pinentry-mac \
+  overmind
 ```
 
 On Ubuntu:
