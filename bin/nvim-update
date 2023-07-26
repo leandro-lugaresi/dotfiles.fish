@@ -1,4 +1,5 @@
-#!/bin/fish
+#!/usr/bin/env fish
+
 cd (zoxide query forks/neovim)
 git checkout master
 git tag -d nightly
