@@ -184,7 +184,9 @@ return {
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
-    config = true,
+    config = function()
+      require('user.tree')
+    end,
   },
   {
     "echasnovski/mini.bufremove",
