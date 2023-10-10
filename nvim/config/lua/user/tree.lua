@@ -22,20 +22,20 @@ end
 
 tree.setup({
   view = {
-        centralize_selection = false,
-        cursorline = true,
-        debounce_delay = 15,
-        width = 30,
-        hide_root_folder = false,
-        side = "left",
-        preserve_window_proportions = false,
-        number = false,
-        relativenumber = false,
-        signcolumn = "yes",
-        float = {
-          enable = true,
-          quit_on_focus_loss = true,
-          open_win_config = set_win(),
-        },
-      },
+    centralize_selection = false,
+    cursorline = true,
+    debounce_delay = 15,
+    width = 30,
+    hide_root_folder = false,
+    side = "left",
+    preserve_window_proportions = false,
+    number = false,
+    relativenumber = false,
+    signcolumn = "yes",
+    float = {
+      enable = true,
+      quit_on_focus_loss = true,
+      open_win_config = set_win(),
+    },
+  },
 })
