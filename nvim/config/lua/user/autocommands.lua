@@ -6,6 +6,14 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   group = vim.api.nvim_create_augroup("Dockerfile", { clear = true }),
 })
 
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = "*.graphql",
+  callback = function()
+    vim.opt_local.ft = "graphql"
+  end,
+  group = vim.api.nvim_create_augroup("GraphQL", { clear = true }),
+})
+
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "gitcommit",
   command = "startinsert",
