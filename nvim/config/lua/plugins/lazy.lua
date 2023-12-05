@@ -185,7 +185,7 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
     config = function()
-      require('user.tree')
+      require("user.tree")
     end,
   },
   {
