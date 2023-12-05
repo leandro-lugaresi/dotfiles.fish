@@ -6,6 +6,8 @@ conform.setup({
     go = { "gofumpt", "injected" },
     html = { "prettier", "injected" },
     javascript = { "prettier" },
+    javascriptreact = { "prettier" },
+    typescript = { "prettier" },
     json = { "prettier" },
     lua = { "stylua" },
     markdown = { "prettier" },
