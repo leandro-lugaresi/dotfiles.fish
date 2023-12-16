@@ -1,0 +1,7 @@
+#!/usr/bin/env fish
+
+if ! tmux has-session -t="default" 2>/dev/null
+    tmux new-session -ds default -c "$HOME"
+end
+
+tmux switch-client -t default

@@ -6,7 +6,7 @@
 
 ---
 
-Forked from my [caarlos0 dotfiles.fish](https://github.com/caarlos0/dotfiles.fish), thanks for this amazing repository.
+Forked from [caarlos0 dotfiles.fish](https://github.com/caarlos0/dotfiles.fish), thanks for this amazing repository.
 
 ## Installation
 
@@ -77,6 +77,7 @@ the same name.
   and namespaces switch;
 - [`neovim`](https://neovim.io) extensible Vim-based text editor;
 - [`starship.rs`](https://starship.rs) the shell prompt we are using;
+- [`tms`](https://github.com/jrmoulton/tmux-sessionizer) A Tmux sessionizer
 
 To install them all with `brew`:
 
@@ -101,7 +102,8 @@ brew install \
   gpg2 \
   gnupg \
   pinentry-mac \
-  overmind
+  overmind \
+  watchexec
 ```
 
 On Ubuntu:
@@ -110,6 +112,12 @@ On Ubuntu:
 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 sudo apt install fish grc fzf zoxide fd-find exa bat alacritty kitty neovim
 # TODO: install delta, kubectx
+```
+
+After that, install the tmux-sessionizer:
+
+```bash
+cargo install tmux-sessionizer
 ```
 
 ## macOS defaults
