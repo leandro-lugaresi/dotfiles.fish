@@ -9,7 +9,7 @@ wezterm.on("gui-startup", function()
 end)
 
 local function scheme_for_appearance(appearance)
-  if appearance:find "Dark" then
+  if appearance:find("Dark") then
     return "OLEDppuccin"
   else
     return "Catppuccin Latte"
@@ -30,24 +30,27 @@ return {
   enable_scroll_bar = false,
 
   -- fonts
-  font = wezterm.font("FiraCode Nerd Font Mono"),
+  font = wezterm.font_with_fallback({
+    { family = "CommitMono", weight = "Regular", stretch = "Normal", style = "Normal" },
+    "FiraCode Nerd Font Mono",
+  }),
   font_size = 16.0,
   use_cap_height_to_scale_fallback_fonts = true,
-  -- harfbuzz_features = {
-  --   "zero=1",
-  --   "ss01=1",
-  --   "ss02=1",
-  --   "ss03=1",
-  --   "ss04=1",
-  --   "ss05=1",
-  --   "ss06=1",
-  --   "onum=0",
-  --   "frac=0",
-  --   "sups=0",
-  --   "subs=0",
-  --   "calt=1",
-  --   "liga=1",
-  -- },
+  harfbuzz_features = {
+    "zero=1",
+    "ss01=1",
+    "ss02=1",
+    "ss03=1",
+    "ss04=1",
+    "ss05=1",
+    "ss06=1",
+    "onum=0",
+    "frac=0",
+    "sups=0",
+    "subs=0",
+    "calt=1",
+    "liga=1",
+  },
 
   term = "wezterm",
 
