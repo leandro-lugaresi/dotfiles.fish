@@ -1,0 +1,8 @@
+#!/usr/bin/env fish
+
+for file in (path resolve ./*/package.json)
+	set basedir (path dirname $file)
+	echo running yarn install inside $basedir
+	cd $basedir
+	yarn install
+end
