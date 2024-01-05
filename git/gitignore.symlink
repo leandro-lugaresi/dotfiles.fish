@@ -17,5 +17,5 @@ coverage.out
 coverage.txt
 .luarc.json
 *.log
-Procfile.local
+Procfile.*
 .overmind.env
