@@ -15,6 +15,9 @@ require("user.options")
 require("user.keymaps")
 require("user.autocommands")
 require("lazy").setup("plugins", {
+  dev = {
+    path = "~/dev/nvim",
+  },
   checker = {
     enabled = true,
     notify = true,

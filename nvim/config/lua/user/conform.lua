@@ -1,5 +1,6 @@
 local conform = require("conform")
 conform.setup({
+  log_level = vim.log.levels.DEBUG,
   formatters_by_ft = {
     css = { "prettier" },
     fish = { "fish_indent" },
@@ -22,8 +23,8 @@ conform.setup({
     ["_"] = { "trim_whitespace" },
   },
   format_on_save = {
-    lsp_fallback = true,
-    timeout_ms = 500,
+    lsp_fallback = false,
+    timeout_ms = 700,
   },
 })
 
