@@ -214,8 +214,9 @@ return {
   { "tpope/vim-speeddating", event = "BufEnter" },
   {
     "f-person/auto-dark-mode.nvim",
+    dev = true,
     config = {
-      update_interval = 1000,
+      update_interval = 3000,
       set_dark_mode = function()
         vim.api.nvim_set_option("background", "dark")
       end,
