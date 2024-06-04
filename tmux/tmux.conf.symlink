@@ -48,8 +48,8 @@ bind-key -T copy-mode-vi r send-keys -X rectangle-toggle
 bind-key m choose-window "join-pane -v -s "%%""
 
 # open splits and windows in the current folder
-bind u split-window -p 30 -c "#{pane_current_path}"
-bind y split-window -p 50 -h -c "#{pane_current_path}"
+bind u split-window -l 30% -c "#{pane_current_path}"
+bind y split-window -l 50% -h -c "#{pane_current_path}"
 bind c new-window -c "#{pane_current_path}"
 
 # vim-like pane switching
