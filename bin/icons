@@ -20,7 +20,7 @@ curl | http | pint | lynx | wget |w3m)
         echo ;;
 docker |docker-compose)
         echo ;;
-exa | lf | ls | nnn |ranger)
+eza | lf | ls | nnn |ranger)
         echo פּ;;
 elixir |mix)
         echo ;;

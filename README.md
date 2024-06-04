@@ -85,7 +85,7 @@ To install them all with `brew`:
 brew install \
   alacritty \
   bat \
-  exa \
+  eza \
   fd \
   fish \
   fzf \

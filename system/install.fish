@@ -1,10 +1,10 @@
 #!/usr/bin/env fish
 abbr -a less 'less -r'
 
-if command -qs exa
-    alias --save l='exa -lh --icons'
-    alias --save ll='exa -l --icons'
-    alias --save lt='exa -l --icons --tree --level=2'
+if command -qs eza
+    alias --save l='eza -lh --icons'
+    alias --save ll='eza -l --icons'
+    alias --save lt='eza -l --icons --tree --level=2'
 else
     alias --save l='ls -lAh'
     alias --save ll='ls -l'
