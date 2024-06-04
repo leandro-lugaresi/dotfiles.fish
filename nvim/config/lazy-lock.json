@@ -15,6 +15,7 @@
   "cmp_luasnip": { "branch": "master", "commit": "05a9ab28b53f71d1aece421ef32fee2cb857a843" },
   "conform.nvim": { "branch": "master", "commit": "b8f3ed3903430033f638b17f7455b8fd3d6a85b5" },
   "copilot.lua": { "branch": "master", "commit": "f7612f5af4a7d7615babf43ab1e67a2d790c13a6" },
+  "deepwhite.nvim": { "branch": "main", "commit": "f1db7888f0a7cf84d6d802c17c074bccca0a72a5" },
   "dressing.nvim": { "branch": "master", "commit": "572314728cb1ce012e825fd66331f52c94acac12" },
   "easyread.nvim": { "branch": "main", "commit": "0b07e315a4cd7d700c4a794bdddbec79fdc2628b" },
   "elixir-tools.nvim": { "branch": "main", "commit": "51eddb03a7a8c9f00d6415b356a4d3b75d8e75b6" },

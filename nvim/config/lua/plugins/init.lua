@@ -22,6 +22,12 @@ return {
     end,
   },
   {
+    "Verf/deepwhite.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function() end,
+  },
+  {
     "akinsho/bufferline.nvim",
     dependencies = {
       "nvim-tree/nvim-web-devicons",

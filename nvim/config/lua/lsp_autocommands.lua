@@ -46,6 +46,24 @@ local M = {}
 ---@param client table Client object
 ---@param bufnr number
 M.on_attach = function(client, bufnr)
+  if
+    client.server_capabilities.documentFormattingProvider
+    and client.name ~= "lua_ls"
+    and client.name ~= "tsserver"
+  then
+    vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.format({
+          filter = function(cli)
+            return cli.name == client.name
+          end,
+        })
+      end,
+      group = group,
+    })
+  end
+
   -- If the organizeImports codeAction runs for lua files, depending on
   -- where the cursor is, it'll reorder the args and break stuff.
   -- This took me way too long to figure out.

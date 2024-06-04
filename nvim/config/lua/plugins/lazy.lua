@@ -218,10 +218,23 @@ return {
     config = {
       update_interval = 3000,
       set_dark_mode = function()
+        vim.cmd([[colorscheme catppuccin]])
+        require("user.colorscheme")
+        require("lualine").setup({
+          options = {
+            theme = "catppuccin",
+          },
+        })
         vim.api.nvim_set_option("background", "dark")
       end,
       set_light_mode = function()
+        vim.cmd([[colorscheme deepwhite]])
         vim.api.nvim_set_option("background", "light")
+        require("lualine").setup({
+          options = {
+            theme = "deepwhite",
+          },
+        })
       end,
     },
     init = function()
