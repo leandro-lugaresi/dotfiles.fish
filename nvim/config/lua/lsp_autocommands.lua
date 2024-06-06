@@ -78,16 +78,6 @@ M.on_attach = function(client, bufnr)
   end
 
   if client.server_capabilities.codeLensProvider then
-    vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-      buffer = bufnr,
-      callback = function()
-        if is_alive(client) then
-          vim.lsp.codelens.refresh()
-        end
-      end,
-      group = group,
-    })
-
     vim.api.nvim_create_autocmd("LspDetach", {
       buffer = bufnr,
       callback = function()
