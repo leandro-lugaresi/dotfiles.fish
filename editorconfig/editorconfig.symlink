@@ -12,11 +12,15 @@ indent_style = tab
 insert_final_newline = true
 trim_trailing_whitespace = true
 
+[*.{py,sh}]
+indent_size = 4
+indent_style = space
+
 [*.{rb,yaml,yml,lua,ex,exs}]
 indent_style = space
 indent_size = 2
 
-[*.{ts,js,tsx,jsx,json,d.ts,graphql,mjs,mts}]
+[*.{ts,js,tsx,jsx,cjs,json,d.ts,graphql,mjs,mts}]
 indent_size = 2
 indent_style = space
 
