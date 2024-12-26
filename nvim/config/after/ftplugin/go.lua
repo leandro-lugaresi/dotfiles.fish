@@ -63,3 +63,12 @@ end
 vim.api.nvim_create_user_command("GoModTidy", tidy, vim.tbl_extend("force", { desc = "go mod tidy" }, {}))
 
 vim.keymap.set("n", "<leader>gmt", ":GoModTidy<CR>", { noremap = true, silent = true, desc = "Run go mod tidy" })
+
+vim.keymap.set("n", "<F6>", function()
+  vim.notify("Running golangci-lint...")
+  local output = vim.fn.system("golangci-lint run --max-issues-per-linter=0 --fix")
+
+  if output and output ~= "" then
+    vim.notify(output)
+  end
+end)
