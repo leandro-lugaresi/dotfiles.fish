@@ -34,7 +34,7 @@ return {
     { family = "CommitMono", weight = "Regular", stretch = "Normal", style = "Normal" },
     "FiraCode Nerd Font Mono",
   }),
-  font_size = 16.0,
+  font_size = 18.0,
   use_cap_height_to_scale_fallback_fonts = true,
   harfbuzz_features = {
     "zero=1",
