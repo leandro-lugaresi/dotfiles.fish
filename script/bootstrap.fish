@@ -105,7 +105,7 @@ function install_dotfiles
     or abort ssh-rc
     link_file $DOTFILES_ROOT/wezterm $HOME/.config/wezterm backup
     or abort wezterm
-    link_file $DOTFILES_ROOT/ghostty/config $HOME/.config/ghostty/config backup
+    link_file $DOTFILES_ROOT/ghostty $HOME/.config/ghostty backup
     or abort ghostty
     # 	or abort nvim
     link_file $DOTFILES_ROOT/nvim/config $HOME/.config/nvim backup
