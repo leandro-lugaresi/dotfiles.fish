@@ -41,6 +41,7 @@ local options = {
   grepprg = "rg --vimgrep --smart-case --follow",
   background = "dark",
   termguicolors = true,
+  shell = "fish",
 }
 
 vim.opt.shortmess:append("c")
