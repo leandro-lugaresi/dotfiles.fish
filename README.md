@@ -71,8 +71,6 @@ the same name.
 - [`gh`](https://github.com/cli/cli) for more GitHub integration with the
   terminal;
 - [`grc`](https://github.com/garabik/grc) to colorize command's outputs;
-- [`kitty`](https://github.com/kovidgoyal/kitty) a cross-platform, fast,
-  feature-rich, GPU based terminal;
 - [`kubectx`](https://github.com/ahmetb/kubectx) for better Kubernetes context
   and namespaces switch;
 - [`neovim`](https://neovim.io) extensible Vim-based text editor;
@@ -83,7 +81,6 @@ To install them all with `brew`:
 
 ```console
 brew install \
-  alacritty \
   bat \
   eza \
   fd \
@@ -92,12 +89,12 @@ brew install \
   gh \
   git-delta \
   grc \
-  kitty \
   kubectx \
   neovim \
   starship \
   zoxide \
   wezterm \
+  ghostty \
   ripgrep \
   gpg2 \
   gnupg \
