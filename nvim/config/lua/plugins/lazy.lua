@@ -201,11 +201,6 @@ return {
     },
   },
   {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    config = true,
-  },
-  {
     "nvim-tree/nvim-tree.lua",
     cmd = "NvimTreeToggle",
     keys = {
