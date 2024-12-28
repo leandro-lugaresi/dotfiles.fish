@@ -21,14 +21,14 @@ darkMode.setup({
     })
   end,
   set_light_mode = function()
-    vim.cmd([[colorscheme deepwhite]])
-    vim.api.nvim_set_option("background", "light")
+    vim.cmd([[colorscheme catppuccin]])
+    require("user.colorscheme")
     require("lualine").setup({
       options = {
-        theme = "deepwhite",
+        theme = "catppuccin",
       },
     })
-
+    vim.api.nvim_set_option("background", "light")
     vim.fn.jobstart('yes | fish_config theme save "Catppuccin Latte"', {
       stdout_buffered = true,
       on_stdout = function(_, data)
