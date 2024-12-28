@@ -63,7 +63,7 @@ cmp.setup({
   formatting = {
     fields = { "kind", "abbr", "menu" },
     format = function(_, item)
-      local icons = require("user.icons").kinds
+      local icons = require("user.icons").kind
       if icons[item.kind] then
         item.kind = icons[item.kind] .. item.kind
       end
