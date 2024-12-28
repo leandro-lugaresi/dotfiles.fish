@@ -25,7 +25,6 @@ vim.api.nvim_create_autocmd("FileType", {
 
 local function document_symbols_for_selected(prompt_bufnr)
   local action_state = require("telescope.actions.state")
-  local actions = require("telescope.actions")
   local entry = action_state.get_selected_entry()
 
   if entry == nil then
@@ -89,9 +88,9 @@ local function document_symbols_for_selected(prompt_bufnr)
               local kind = vim.lsp.protocol.SymbolKind[symbol.kind] or "Other"
               return {
                 value = symbol,
-                display = function(entry)
-                  local display_text = string.format("%-50s %s", entry.value.name, kind)
-                  return display_text, { { { #entry.value.name + 1, #display_text }, "TelescopeSymbolKind" } }
+                display = function(item)
+                  local display_text = string.format("%-50s %s", item.value.name, kind)
+                  return display_text, { { { #item.value.name + 1, #display_text }, "TelescopeSymbolKind" } }
                 end,
                 ordinal = symbol.name,
                 filename = entry.path,
@@ -261,6 +260,7 @@ telescope.load_extension("gh")
 telescope.load_extension("harpoon")
 telescope.load_extension("fzf")
 telescope.load_extension("ui-select")
+-- telescope.load_extension("dap")
 telescope.load_extension("notify")
 telescope.load_extension("package_info")
 telescope.load_extension("makefile_targets")
