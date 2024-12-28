@@ -121,18 +121,6 @@ return {
     },
   },
   {
-    "stevearc/dressing.nvim",
-    event = "VeryLazy",
-    config = true,
-  },
-  {
-    "j-hui/fidget.nvim",
-    event = "VeryLazy",
-    opts = {
-      text = { spinner = "dots_pulse" },
-    },
-  },
-  {
     "danymat/neogen",
     event = "BufEnter",
     keys = {
@@ -180,16 +168,6 @@ return {
     event = "VeryLazy",
     config = function()
       require("user.harpoon")
-    end,
-  },
-  {
-    "tpope/vim-fugitive",
-    cmd = "Git",
-    keys = {
-      { "<leader>gs", vim.cmd.Git, noremap = true, silent = true, desc = "Open Git" },
-    },
-    config = function()
-      require("user.fugitive")
     end,
   },
   { "f-person/git-blame.nvim", event = "VeryLazy" },

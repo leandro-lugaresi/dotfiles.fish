@@ -1,5 +1,25 @@
 return {
   {
+    "stevearc/dressing.nvim",
+    event = "VeryLazy",
+    config = true,
+  },
+  {
+    "j-hui/fidget.nvim",
+    event = "VeryLazy",
+    opts = {
+      text = { spinner = "dots_pulse" },
+    },
+  },
+  {
+    "rcarriga/nvim-notify",
+    priority = 999,
+    config = function()
+      require("user.notify")
+    end,
+  },
+  { "MunifTanjim/nui.nvim" },
+  {
     "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000,
@@ -15,15 +35,8 @@ return {
     },
   },
   {
-    "rcarriga/nvim-notify",
-    priority = 999,
-    config = function()
-      require("user.notify")
-    end,
-  },
-  {
     "Verf/deepwhite.nvim",
-    lazy = false,
+    lazy = true,
     priority = 1000,
     config = function() end,
   },
@@ -57,40 +70,6 @@ return {
           require("barbecue.ui").update()
         end,
       })
-    end,
-  },
-  {
-    "nvim-lualine/lualine.nvim",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
-    opts = {
-      options = {
-        theme = "catppuccin",
-        component_separators = "",
-        section_separators = "",
-      },
-      sections = {
-        lualine_c = {
-          "%=",
-          {
-            "filetype",
-            icon_only = true,
-            icon = { align = "right" },
-          },
-          {
-            "filename",
-            file_status = false,
-            path = 1,
-          },
-        },
-      },
-    },
-  },
-  {
-    "rmagatti/auto-session",
-    config = function()
-      require("user.autosession")
     end,
   },
 }
