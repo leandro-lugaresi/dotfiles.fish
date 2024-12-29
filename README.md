@@ -59,8 +59,7 @@ the same name.
 
 ## Recommended Software
 
-- [`alacritty`](https://github.com/alacritty/alacritty) a cross-platform, OpenGL
-  terminal emulator;
+- [`Ghostty`](https://github.com/ghostty-org/ghostty) a fast, cross-platform terminal emulator;
 - [`bat`](https://github.com/sharkdp/bat) a cat(1) clone with wings;
 - [`delta`](https://github.com/dandavison/delta) for better git diffs;
 - [`fd`](https://github.com/sharkdp/fd) a simple, fast and user-friendly
