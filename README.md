@@ -6,7 +6,7 @@
 
 ---
 
-Forked from [caarlos0 dotfiles.fish](https://github.com/caarlos0/dotfiles.fish), thanks for this amazing repository.
+Detatched fork from [caarlos0 dotfiles.fish](https://github.com/caarlos0/dotfiles.fish), thanks for this amazing repository.
 
 ## Installation
 
