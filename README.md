@@ -128,7 +128,9 @@ And logging out and in again or restart.
 
 ## Themes and fonts
 
-_Catppuccin Mocha_ and _IosevkaTerm_ Font.
+_Catppuccin_ and _IosevkaTerm_ Font.
+
+The system is set up to automatically switch between dark and light modes based on the current system configuration. Additionally, tools such as Ghostty, Neovim, and Fish include automated checks that adjust their appearance according to the macOS settings.
 
 ## Screenshots
 
