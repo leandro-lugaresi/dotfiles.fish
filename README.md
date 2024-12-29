@@ -128,18 +128,24 @@ And logging out and in again or restart.
 
 ## Themes and fonts
 
-_Catppuccin Mocha_ and _FiraCode_ Font.
+_Catppuccin Mocha_ and _IosevkaTerm_ Font.
 
 ## Screenshots
 
 ### neovim with LSP, git signs, etc
 
-![CleanShot 2022-10-01 at 20 12 19@2x](https://user-images.githubusercontent.com/245435/193431550-5f279c3d-a0f6-4e67-81bc-1c1538fc71be.png)
+![image](https://github.com/user-attachments/assets/d67fef29-bb89-49cc-939d-2f70f3b0b8f7)
 
 ### neovim telescope
 
-![CleanShot 2022-10-01 at 20 12 34@2x](https://user-images.githubusercontent.com/245435/193431554-9ab32711-3eab-4d0e-8cec-f7b09713abf5.png)
+![image](https://github.com/user-attachments/assets/ce3d785f-e71f-45e5-a2a8-909b51773462)
 
 ### tmux-sessionizer and tmux tabs with icons
 
-![CleanShot 2022-10-01 at 20 13 06@2x](https://user-images.githubusercontent.com/245435/193431556-8ee21015-8cde-44d0-93c2-ac3040a44057.png)
+![image](https://github.com/user-attachments/assets/e9eceaea-7f70-468f-9af6-d75d6b6a8fcb)
+
+### dark theme and light theme
+![image](https://github.com/user-attachments/assets/7e043310-a243-4565-ba39-6bf0a43c146e)
+![image](https://github.com/user-attachments/assets/8273cfa6-6b48-45c2-ac21-e3e444475af2)
+
+
