@@ -253,6 +253,18 @@ telescope.setup({
       -- Optional theme (the extension doesn't set a default theme)
       -- theme = "ivy",
     },
+    frecency = {
+      default_workspace = "CWD",
+      show_scores = true,
+      show_unindexed = true,
+      disable_devicons = false,
+      ignore_patterns = {
+        "*.git/*",
+        "*/tmp/*",
+        "*/node_modules/*",
+        "*/lua-language-server/*",
+      },
+    },
   },
 })
 
@@ -260,6 +272,7 @@ telescope.load_extension("gh")
 telescope.load_extension("harpoon")
 telescope.load_extension("fzf")
 telescope.load_extension("ui-select")
+telescope.load_extension("frecency")
 -- telescope.load_extension("dap")
 telescope.load_extension("notify")
 telescope.load_extension("package_info")
@@ -283,6 +296,13 @@ wk.add({
       require("telescope.builtin").find_files()
     end,
     desc = "Find File (CWD)",
+  },
+  {
+    "<leader>se",
+    function()
+      require("telescope").extensions.frecency.frecency({})
+    end,
+    desc = "Frecency",
   },
   {
     "<leader>sg",

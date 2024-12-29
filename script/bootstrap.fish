@@ -107,7 +107,6 @@ function install_dotfiles
     or abort wezterm
     link_file $DOTFILES_ROOT/ghostty $HOME/.config/ghostty backup
     or abort ghostty
-    # 	or abort nvim
     link_file $DOTFILES_ROOT/nvim/config $HOME/.config/nvim backup
     or abort nvim
     link_file $DOTFILES_ROOT/yamllint/config $HOME/.config/yamllint/config backup

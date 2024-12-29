@@ -11,6 +11,7 @@ return {
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
       "nvim-telescope/telescope-ui-select.nvim",
       "ThePrimeagen/harpoon",
+      "nvim-telescope/telescope-frecency.nvim",
     },
   },
 }
