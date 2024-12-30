@@ -69,15 +69,6 @@ return {
     config = true,
   },
   {
-    "JellyApple102/easyread.nvim",
-    ft = { "text", "markdown" },
-    config = function()
-      require("easyread").setup({
-        fileTypes = { "text", "markdown" },
-      })
-    end,
-  },
-  {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     build = ":Copilot auth",
