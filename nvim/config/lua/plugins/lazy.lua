@@ -41,21 +41,6 @@ return {
     end,
   },
   {
-    "echasnovski/mini.indentscope",
-    version = false, -- wait till new 0.7.0 release to put it back on semver
-    event = "BufReadPre",
-    config = function()
-      local indent = require("mini.indentscope")
-      indent.setup({
-        symbol = "│",
-        draw = {
-          animation = indent.gen_animation.none(),
-        },
-        options = { try_as_border = true },
-      })
-    end,
-  },
-  {
     "lewis6991/gitsigns.nvim",
     event = "BufEnter",
     config = true,
@@ -173,22 +158,9 @@ return {
     end,
   },
   {
-    "echasnovski/mini.bufremove",
-    version = "*",
-    config = function()
-      require("mini.bufremove").setup({})
-    end,
-    keys = {
-      {
-        "<leader>q",
-        function()
-          require("mini.bufremove").delete(0, true)
-        end,
-        noremap = true,
-        silent = true,
-        desc = "Delete buffer",
-      },
-    },
+    "folke/persistence.nvim",
+    event = "BufReadPre", -- this will only start session saving when an actual file was opened
+    opts = {},
   },
   { "asiryk/auto-hlsearch.nvim", event = "VeryLazy", config = true },
   { "tpope/vim-abolish", event = "BufEnter" },
