@@ -7,6 +7,7 @@ return {
     },
     opts = { width = 25 },
   },
+
   {
     "williamboman/mason.nvim",
     event = "BufEnter",
@@ -58,16 +59,19 @@ return {
       require("user.conform")
     end,
   },
+
   {
     "kylechui/nvim-surround",
     event = "VeryLazy",
     config = true,
   },
+
   {
     "numToStr/Comment.nvim",
     event = "VeryLazy",
     config = true,
   },
+
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
@@ -89,35 +93,7 @@ return {
       panel = { enabled = false },
     },
   },
-  {
-    "elixir-tools/elixir-tools.nvim",
-    version = "*",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      local elixir = require("elixir")
-      local elixirls = require("elixir.elixirls")
 
-      elixir.setup({
-        nextls = { enable = true },
-        credo = {},
-        elixirls = {
-          enable = true,
-          settings = elixirls.settings({
-            dialyzerEnabled = false,
-            enableTestLenses = false,
-          }),
-          on_attach = function(client, bufnr)
-            vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
-            vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
-            vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
-          end,
-        },
-      })
-    end,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-  },
   {
     "vuki656/package-info.nvim",
     event = "BufReadPre",
@@ -125,27 +101,6 @@ return {
       require("package-info").setup()
     end,
     keys = {
-      -- Show dependency versions
-      -- vim.keymap.set({ "n" }, "<LEADER>ns", require("package-info").show, { silent = true, noremap = true })
-      --
-      -- -- Hide dependency versions
-      -- vim.keymap.set({ "n" }, "<LEADER>nc", require("package-info").hide, { silent = true, noremap = true })
-      --
-      -- -- Toggle dependency versions
-      -- vim.keymap.set({ "n" }, "<LEADER>nt", require("package-info").toggle, { silent = true, noremap = true })
-      --
-      -- -- Update dependency on the line
-      -- vim.keymap.set({ "n" }, "<LEADER>nu", require("package-info").update, { silent = true, noremap = true })
-      --
-      -- -- Delete dependency on the line
-      -- vim.keymap.set({ "n" }, "<LEADER>nd", require("package-info").delete, { silent = true, noremap = true })
-      --
-      -- -- Install a new dependency
-      -- vim.keymap.set({ "n" }, "<LEADER>ni", require("package-info").install, { silent = true, noremap = true })
-      --
-      -- -- Install a different dependency version
-      -- vim.keymap.set({ "n" }, "<LEADER>np", require("package-info").change_version, { silent = true, noremap = true })
-
       { "<leader>Ns", "<cmd>lua require('package-info').show()<CR>", desc = "Show dependency versions" },
       { "<leader>Nc", "<cmd>lua require('package-info').hide()<CR>", desc = "Hide dependency versions" },
       { "<leader>NT", "<cmd>lua require('package-info').toggle()<CR>", desc = "Toggle dependency versions" },
@@ -159,5 +114,37 @@ return {
       },
       { "<leader>Nt", ":Telescope package_info<CR>", desc = "Telescope package info" },
     },
+  },
+
+  {
+    "pmizio/typescript-tools.nvim",
+    event = "BufReadPre",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {},
+    config = function()
+      require("typescript-tools").setup({
+        settings = {
+          separate_diagnostic_server = true,
+          expose_as_code_action = "all",
+          -- tsserver_plugins = {},
+          tsserver_max_memory = "auto",
+          complete_function_calls = true,
+          include_completions_with_insert_text = true,
+          tsserver_file_preferences = {
+            includeInlayParameterNameHints = "all", -- "none" | "literals" | "all";
+            includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+            includeInlayFunctionParameterTypeHints = true,
+            includeInlayVariableTypeHints = true,
+            includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+            includeInlayPropertyDeclarationTypeHints = true,
+            includeInlayFunctionLikeReturnTypeHints = true,
+            includeInlayEnumMemberValueHints = true,
+            includeCompletionsForModuleExports = true,
+            quotePreference = "auto",
+            -- autoImportFileExcludePatterns = { "node_modules/*", ".git/*" },
+          },
+        },
+      })
+    end,
   },
 }
