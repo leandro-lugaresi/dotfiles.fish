@@ -13,11 +13,6 @@ darkMode.setup({
     vim.api.nvim_set_option("background", "dark")
     vim.fn.jobstart('yes | fish_config theme save "Catppuccin Mocha"', {
       stdout_buffered = true,
-      on_stdout = function(_, data)
-        if data then
-          vim.notify(data)
-        end
-      end,
     })
   end,
   set_light_mode = function()
@@ -31,11 +26,6 @@ darkMode.setup({
     vim.api.nvim_set_option("background", "light")
     vim.fn.jobstart('yes | fish_config theme save "Catppuccin Latte"', {
       stdout_buffered = true,
-      on_stdout = function(_, data)
-        if data then
-          vim.notify(data)
-        end
-      end,
     })
   end,
 })
