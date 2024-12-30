@@ -293,16 +293,11 @@ wk.add({
   {
     "<leader>sf",
     function()
-      require("telescope.builtin").find_files()
+      require("telescope.builtin").find_files({
+        find_command = { "rg", "--hidden", "--files", "--smart-case", "--glob=!.git" },
+      })
     end,
     desc = "Find File (CWD)",
-  },
-  {
-    "<leader>se",
-    function()
-      require("telescope").extensions.frecency.frecency({})
-    end,
-    desc = "Frecency",
   },
   {
     "<leader>sg",
@@ -452,11 +447,16 @@ wk.add({
     desc = "Open harpoon marks",
   },
   {
+    "<leader>nn",
+    function()
+      require("telescope").extensions.notify.notify()
+    end,
+    desc = "Open notification history",
+  },
+  {
     "<C-p>",
     function()
-      require("telescope.builtin").find_files({
-        find_command = { "rg", "--hidden", "--files", "--smart-case", "--glob=!.git" },
-      })
+      require("telescope").extensions.frecency.frecency({})
     end,
     desc = "Search current buffer",
   },
