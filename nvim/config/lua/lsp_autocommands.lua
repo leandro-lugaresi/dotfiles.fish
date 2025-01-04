@@ -1,4 +1,5 @@
 local ms = require("vim.lsp.protocol").Methods
+local ellipsis = require("user.icons").ui.Ellipsis
 local group = vim.api.nvim_create_augroup("LSP", { clear = true })
 
 -- Format code and organize imports (if supported) (async).
@@ -39,6 +40,28 @@ local has_clients_with_method = function(bufnr, method)
   return #clients > 0
 end
 
+-- Workaround for truncating long TypeScript inlay hints.
+-- TODO: Remove this if https://github.com/neovim/neovim/issues/27240 gets addressed.
+local inlay_hint_handler = vim.lsp.handlers[ms.textDocument_inlayHint]
+vim.lsp.handlers[ms.textDocument_inlayHint] = function(err, result, ctx, config)
+  local client = vim.lsp.get_client_by_id(ctx.client_id)
+  if client and client.name == "typescript-tools" and result then
+    result = vim
+      .iter(result)
+      :map(function(hint)
+        local label = hint.label ---@type string
+        if label:len() >= 40 then
+          label = label:sub(1, 39) .. ellipsis
+        end
+        hint.label = label
+        return hint
+      end)
+      :totable()
+  end
+
+  inlay_hint_handler(err, result, ctx, config)
+end
+
 ---@param bufnr number
 ---@param method string
 ---@param apply lsp.Apply
@@ -66,7 +89,7 @@ M.setup = function()
       if client == nil then
         return
       end
-      if client.supports_method(ms.textDocument_codeLens) then
+      if client.supports_method(ms.textDocument_inlayHint) then
         vim.lsp.inlay_hint.enable(true)
       end
     end,
