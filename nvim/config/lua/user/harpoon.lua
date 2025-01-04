@@ -1,9 +1,10 @@
-local harpoon = require("harpoon.ui")
-local mark = require("harpoon.mark")
+local harpoon = require("harpoon")
+
+harpoon:setup()
 
 local function nav(i)
   return function()
-    harpoon.nav_file(i)
+    harpoon:list():select(i)
   end
 end
 
@@ -15,10 +16,22 @@ local function k(key, fn, desc)
   })
 end
 
-k("<leader>m,", harpoon.nav_prev, "Harpoon previous")
-k("<leader>m.", harpoon.nav_next, "Harpoon next")
-k("<leader>mm", mark.add_file, "Harpoon mark current file")
-k("<leader>me", harpoon.toggle_quick_menu, "Harpoon toggle quick menu")
+k("<leader>mp", function()
+  harpoon:list():prev()
+end, "Harpoon previous")
+
+k("<leader>mn", function()
+  harpoon:list():next()
+end, "Harpoon next")
+
+k("<leader>mm", function()
+  harpoon:list():add()
+end, "Harpoon mark current file")
+
+k("<leader>me", function()
+  harpoon.ui:toggle_quick_menu(harpoon:list())
+end, "Harpoon toggle quick menu")
+
 k("<A-a>", nav(1), "Harpoon go to file 1")
 k("<A-r>", nav(2), "Harpoon go to file 2")
 k("<A-s>", nav(3), "Harpoon go to file 3")
