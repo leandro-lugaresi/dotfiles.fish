@@ -9,34 +9,33 @@ return {
   },
 
   {
+    "saghen/blink.cmp",
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+      "giuxtaposition/blink-cmp-copilot",
+    },
+    version = "*",
+    config = function()
+      require("user.cmp")
+    end,
+  },
+
+  {
     "williamboman/mason.nvim",
     event = "BufEnter",
     dependencies = {
+      -- Dependencies for lsp packages
+      "nvim-lua/plenary.nvim",
+
       -- lsp
       "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",
       "stevearc/conform.nvim",
-
-      -- cmp
-      "hrsh7th/nvim-cmp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-cmdline",
-      "hrsh7th/cmp-emoji",
-      "hrsh7th/cmp-calc",
+      "pmizio/typescript-tools.nvim",
 
       -- auto pairs/tags
       "windwp/nvim-autopairs",
       "windwp/nvim-ts-autotag",
-
-      -- cmp x lsp
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
-
-      -- snip x cmp
-      "saadparwaiz1/cmp_luasnip",
-      "L3MON4D3/LuaSnip",
-      "rafamadriz/friendly-snippets",
 
       -- hints
       "simrat39/inlay-hints.nvim",
@@ -46,16 +45,9 @@ return {
     },
     config = function()
       require("neodev").setup({})
-      require("luasnip").setup({
-        -- see: https://github.com/L3MON4D3/LuaSnip/issues/525
-        region_check_events = "InsertEnter",
-        delete_check_events = "InsertLeave",
-      })
-      require("luasnip.loaders.from_vscode").lazy_load()
       require("nvim-autopairs").setup({ check_ts = true })
       require("nvim-ts-autotag").setup({ enable = true })
       require("user.lsp")
-      require("user.cmp")
       require("user.conform")
     end,
   },
@@ -79,8 +71,8 @@ return {
     event = "InsertEnter",
     opts = {
       suggestion = {
-        enabled = true,
-        auto_trigger = true,
+        enabled = false,
+        auto_trigger = false,
         keymap = {
           accept = "<M-l>",
           accept_word = false,
@@ -114,37 +106,5 @@ return {
       },
       { "<leader>Nt", ":Telescope package_info<CR>", desc = "Telescope package info" },
     },
-  },
-
-  {
-    "pmizio/typescript-tools.nvim",
-    event = "BufReadPre",
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    opts = {},
-    config = function()
-      require("typescript-tools").setup({
-        settings = {
-          separate_diagnostic_server = true,
-          expose_as_code_action = "all",
-          -- tsserver_plugins = {},
-          tsserver_max_memory = "auto",
-          complete_function_calls = true,
-          include_completions_with_insert_text = true,
-          tsserver_file_preferences = {
-            includeInlayParameterNameHints = "all", -- "none" | "literals" | "all";
-            includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-            includeInlayFunctionParameterTypeHints = true,
-            includeInlayVariableTypeHints = true,
-            includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-            includeInlayPropertyDeclarationTypeHints = true,
-            includeInlayFunctionLikeReturnTypeHints = true,
-            includeInlayEnumMemberValueHints = true,
-            includeCompletionsForModuleExports = true,
-            quotePreference = "auto",
-            -- autoImportFileExcludePatterns = { "node_modules/*", ".git/*" },
-          },
-        },
-      })
-    end,
   },
 }

@@ -1,120 +1,123 @@
-local cmp = require("cmp")
-local luasnip = require("luasnip")
+require("blink.cmp").setup({
+  keymap = {
+    preset = "default",
+    ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+    ["<C-e>"] = { "hide", "fallback" },
+    ["<CR>"] = { "accept", "fallback" },
 
-local has_words_before = function()
-  ---@diagnostic disable-next-line: deprecated
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
+    ["<Tab>"] = { "snippet_forward", "fallback" },
+    ["<S-Tab>"] = { "snippet_backward", "fallback" },
 
-cmp.setup({
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
+    ["<Up>"] = { "select_prev", "fallback" },
+    ["<Down>"] = { "select_next", "fallback" },
+    ["<C-p>"] = { "select_prev", "fallback" },
+    ["<C-n>"] = { "select_next", "fallback" },
+
+    ["<C-b>"] = { "scroll_documentation_up", "fallback" },
+    ["<C-f>"] = { "scroll_documentation_down", "fallback" },
   },
-  window = {
-    documentation = cmp.config.window.bordered(),
-    completion = {
-      winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
-      col_offset = -3,
-      side_padding = 0,
+  appearance = {
+    use_nvim_cmp_as_default = true,
+    nerd_font_variant = "mono",
+    kind_icons = {
+      Array = "",
+      Boolean = "",
+      Class = "",
+      Color = "",
+      Constant = "",
+      Constructor = "",
+      Copilot = "",
+      Enum = "",
+      EnumMember = "",
+      Event = "",
+      Field = "",
+      File = "",
+      Folder = "󰉋",
+      Function = "",
+      Interface = "",
+      Key = "",
+      Keyword = "",
+      Method = "",
+      Module = "",
+      Namespace = "",
+      Null = "󰟢",
+      Number = "",
+      Object = "",
+      Operator = "",
+      Package = "",
+      Property = "",
+      Reference = "",
+      Snippet = "",
+      String = "",
+      Struct = "",
+      Text = "",
+      TypeParameter = "",
+      Unit = "",
+      Value = "",
+      Variable = "",
     },
   },
-  view = {
-    entries = {
-      name = "custom",
-      selection_order = "near_cursor",
+  signature = { enabled = true },
+  sources = {
+    default = { "lsp", "path", "snippets", "buffer", "copilot" },
+    cmdline = function()
+      local type = vim.fn.getcmdtype()
+      if type == "/" or type == "?" then
+        return { "buffer" }
+      end
+      if type == ":" then
+        return { "cmdline" }
+      end
+      return {}
+    end,
+    providers = {
+      lsp = {
+        min_keyword_length = 2,
+        score_offset = 0,
+      },
+      path = {
+        min_keyword_length = 0,
+      },
+      snippets = {
+        min_keyword_length = 2,
+      },
+      buffer = {
+        min_keyword_length = 5,
+        max_items = 5,
+      },
+      copilot = {
+        name = "copilot",
+        module = "blink-cmp-copilot",
+        score_offset = 100,
+        async = true,
+        transform_items = function(_, items)
+          local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+          local kind_idx = #CompletionItemKind + 1
+          CompletionItemKind[kind_idx] = "Copilot"
+          for _, item in ipairs(items) do
+            item.kind = kind_idx
+          end
+          return items
+        end,
+      },
     },
   },
   completion = {
-    keyword_length = 3,
-  },
-  mapping = cmp.mapping.preset.insert({
-    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete({}),
-    ["<C-e>"] = cmp.mapping.abort(),
-    ["<CR>"] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    }),
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      elseif has_words_before() then
-        cmp.complete()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-  }),
-  formatting = {
-    fields = { "kind", "abbr", "menu" },
-    format = function(_, item)
-      local icons = require("user.icons").kind
-      if icons[item.kind] then
-        item.kind = icons[item.kind] .. item.kind
-      end
-      local strings = vim.split(item.kind, "%s", {
-        trimempty = true,
-      })
-      item.kind = " " .. strings[1] .. " "
-      if #strings > 1 then
-        item.menu = "    (" .. strings[2] .. ")"
-      end
-      return item
-    end,
-  },
-  sources = cmp.config.sources({
-    { name = "nvim_lsp_signature_help" },
-    { name = "nvim_lsp" },
-    {
-      name = "luasnip",
-      keyword_length = 2,
-      priority = 50,
+    accept = { auto_brackets = { enabled = true } },
+
+    documentation = {
+      auto_show = true,
+      auto_show_delay_ms = 250,
+      treesitter_highlighting = true,
     },
-  }, {
-    { name = "buffer" },
-    { name = "path" },
-    { name = "emoji" },
-    { name = "calc" },
-  }),
-  confirm_opts = {
-    behavior = cmp.ConfirmBehavior.Select,
-  },
-  experimental = {
-    native_menu = false,
-    ghost_text = false,
+
+    menu = {
+      draw = {
+        columns = {
+          { "kind_icon", "label", gap = 1 },
+          { "kind" },
+        },
+      },
+    },
   },
 })
-
-cmp.setup.cmdline(":", {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({
-    { name = "cmdline" },
-  }, {
-    { name = "path" },
-  }),
-})
-
-cmp.setup.cmdline({ "/", "?" }, {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = "buffer" },
-  },
-})
-
-local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())

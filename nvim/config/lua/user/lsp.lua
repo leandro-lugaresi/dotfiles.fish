@@ -1,25 +1,14 @@
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local inlay_hints = require("inlay-hints")
-local autocmds = require("lsp_autocommands")
 local keymaps = require("lsp_keymaps")
-
-inlay_hints.setup({
-  renderer = "inlay-hints/render/eol",
-  -- https://github.com/simrat39/inlay-hints.nvim/issues/3
-  eol = {
-    parameter = {
-      format = function(hints)
-        return string.format(" <- (%s)", hints):gsub(":", "")
-      end,
-    },
-    type = {
-      format = function(hints)
-        return string.format(" » (%s)", hints):gsub(":", "")
-      end,
+local capabilities = require("blink.cmp").get_lsp_capabilities({
+  workspace = {
+    didChangeWatchedFiles = {
+      dynamicRegistration = true, -- needs fswatch on linux
+      relativePatternSupport = true,
     },
   },
-})
+}, true)
 
+require("lsp_autocommands").setup()
 require("mason").setup({})
 require("mason-lspconfig").setup({
   automatic_installation = true,
@@ -28,10 +17,34 @@ require("mason-lspconfig").setup({
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  inlay_hints.on_attach(client, bufnr)
-  autocmds.on_attach(client, bufnr)
   keymaps.on_attach(bufnr)
 end
+
+require("typescript-tools").setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    separate_diagnostic_server = true,
+    expose_as_code_action = "all",
+    -- tsserver_plugins = {},
+    tsserver_max_memory = "auto",
+    complete_function_calls = true,
+    include_completions_with_insert_text = true,
+    tsserver_file_preferences = {
+      includeInlayParameterNameHints = "all", -- "none" | "literals" | "all";
+      includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+      includeInlayFunctionParameterTypeHints = true,
+      includeInlayVariableTypeHints = true,
+      includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+      includeInlayPropertyDeclarationTypeHints = true,
+      includeInlayFunctionLikeReturnTypeHints = true,
+      includeInlayEnumMemberValueHints = true,
+      includeCompletionsForModuleExports = true,
+      quotePreference = "auto",
+      -- autoImportFileExcludePatterns = { "node_modules/*", ".git/*" },
+    },
+  },
+})
 
 local lspconfig = require("lspconfig")
 lspconfig.gopls.setup({
@@ -40,6 +53,14 @@ lspconfig.gopls.setup({
   settings = {
     gopls = {
       gofumpt = true,
+      codelenses = {
+        gc_details = true,
+        generate = true,
+        run_govulncheck = true,
+        test = true,
+        tidy = true,
+        upgrade_dependency = true,
+      },
       hints = {
         assignVariableTypes = true,
         compositeLiteralFields = true,
@@ -50,12 +71,15 @@ lspconfig.gopls.setup({
         rangeVariableTypes = true,
       },
       analyses = {
-        fieldalignment = true,
-        staticcheck = true,
+        nilness = true,
+        unusedparams = true,
+        unusedvariable = true,
+        unusedwrite = true,
+        useany = true,
       },
-      codelenses = {
-        run_govulncheck = true,
-      },
+      staticcheck = true,
+      directoryFilters = { "-.git", "-node_modules" },
+      semanticTokens = true,
     },
   },
   flags = {
@@ -63,15 +87,33 @@ lspconfig.gopls.setup({
   },
 })
 
-lspconfig.ltex.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  settings = {
-    ltex = {
-      language = "en-US",
-    },
-  },
-})
+for _, lsp in ipairs({
+  "bashls",
+  "clangd",
+  "cssls",
+  "dockerls",
+  "jsonls",
+  "nil_ls",
+  "rust_analyzer",
+  "taplo",
+  "templ",
+  "terraformls",
+  "tflint",
+  "zls",
+}) do
+  lspconfig[lsp].setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+  })
+end
+
+for _, lsp in ipairs({ "html", "htmx" }) do
+  lspconfig[lsp].setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    filetypes = { "html", "templ" },
+  })
+end
 
 lspconfig.yamlls.setup({
   capabilities = capabilities,
@@ -86,44 +128,17 @@ lspconfig.yamlls.setup({
   },
 })
 
-lspconfig.html.setup({
-  capabilities = capabilities,
+lspconfig.tailwindcss.setup({
   on_attach = on_attach,
-})
-
-lspconfig.jsonls.setup({
   capabilities = capabilities,
-  on_attach = on_attach,
-})
-
-lspconfig.bashls.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
-
-lspconfig.golangci_lint_ls.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
-
-lspconfig.terraformls.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
-
-lspconfig.tflint.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
-
-lspconfig.dockerls.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
-
-lspconfig.clangd.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
+  filetypes = { "html", "templ", "javascript" },
+  settings = {
+    tailwindCSS = {
+      includeLanguages = {
+        templ = "html",
+      },
+    },
+  },
 })
 
 -- Make runtime files discoverable to the server
@@ -144,21 +159,6 @@ lspconfig.lua_ls.setup({
       },
     },
   },
-})
-
-lspconfig.rust_analyzer.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
-
-lspconfig.prosemd_lsp.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
-
-lspconfig.taplo.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
 })
 
 local float_config = {
@@ -187,11 +187,3 @@ for name, icon in pairs(require("user.icons").diagnostics) do
   name = "DiagnosticSign" .. name
   vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
 end
-
--- change documentation to be rouded and non-focusable...
--- any time I focus into one of these, is by accident, and it always take me
--- a couple of seconds to figure out what I did.
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = "rounded",
-  focusable = false,
-})
