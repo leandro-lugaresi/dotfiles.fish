@@ -112,6 +112,9 @@ require("blink.cmp").setup({
     },
 
     menu = {
+      auto_show = function(ctx)
+        return ctx.mode ~= "cmdline"
+      end,
       draw = {
         columns = {
           { "kind_icon", "label", gap = 1 },
