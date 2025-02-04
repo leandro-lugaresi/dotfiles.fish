@@ -91,7 +91,6 @@ for _, lsp in ipairs({
   "bashls",
   "clangd",
   "cssls",
-  "dockerls",
   "jsonls",
   "rust_analyzer",
   "taplo",
@@ -113,6 +112,20 @@ for _, lsp in ipairs({ "html", "htmx" }) do
     filetypes = { "html", "templ" },
   })
 end
+
+lspconfig["dockerls"].setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    docker = {
+      languageserver = {
+        formatter = {
+          ignoreMultilineInstructions = true,
+        },
+      },
+    },
+  },
+})
 
 lspconfig.yamlls.setup({
   capabilities = capabilities,
