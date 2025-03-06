@@ -11,6 +11,14 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+_G.dd = function(...)
+  Snacks.debug.inspect(...)
+end
+_G.bt = function()
+  Snacks.debug.backtrace()
+end
+vim.print = _G.dd
+
 require("user.options")
 require("user.keymaps")
 require("user.autocommands")
