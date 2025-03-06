@@ -58,9 +58,8 @@ require("blink.cmp").setup({
     },
   },
   signature = { enabled = true },
-  sources = {
-    default = { "lsp", "path", "snippets", "buffer", "copilot" },
-    cmdline = function()
+  cmdline = {
+    sources = function()
       local type = vim.fn.getcmdtype()
       if type == "/" or type == "?" then
         return { "buffer" }
@@ -70,9 +69,12 @@ require("blink.cmp").setup({
       end
       return {}
     end,
+  },
+  sources = {
+    default = { "lsp", "path", "snippets", "buffer", "copilot" },
     providers = {
       lsp = {
-        min_keyword_length = 2,
+        min_keyword_length = 0,
         score_offset = 0,
       },
       path = {
