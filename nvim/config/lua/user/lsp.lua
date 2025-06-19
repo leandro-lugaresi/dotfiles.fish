@@ -9,7 +9,7 @@ local capabilities = require("blink.cmp").get_lsp_capabilities({
 }, true)
 
 require("lsp_autocommands").setup()
-require("mason").setup({})
+require("mason").setup()
 require("mason-lspconfig").setup({
   automatic_installation = true,
 })
@@ -62,7 +62,7 @@ lspconfig.gopls.setup({
         upgrade_dependency = true,
       },
       hints = {
-        assignVariableTypes = true,
+        assignVariableTypes = false,
         compositeLiteralFields = true,
         compositeLiteralTypes = true,
         constantValues = true,

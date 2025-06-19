@@ -12,7 +12,6 @@ return {
     "saghen/blink.cmp",
     dependencies = {
       "rafamadriz/friendly-snippets",
-      "giuxtaposition/blink-cmp-copilot",
     },
     version = "*",
     config = function()
@@ -65,28 +64,6 @@ return {
   },
 
   {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    build = ":Copilot auth",
-    event = "InsertEnter",
-    opts = {
-      suggestion = {
-        enabled = false,
-        auto_trigger = false,
-        keymap = {
-          accept = "<M-l>",
-          accept_word = false,
-          accept_line = false,
-          next = "<M-]>",
-          prev = "<M-[>",
-          dismiss = "<C-]>",
-        },
-      },
-      panel = { enabled = false },
-    },
-  },
-
-  {
     "vuki656/package-info.nvim",
     event = "BufReadPre",
     config = function()
@@ -106,5 +83,16 @@ return {
       },
       { "<leader>Nt", ":Telescope package_info<CR>", desc = "Telescope package info" },
     },
+  },
+  {
+    "dmmulroy/ts-error-translator.nvim",
+    lazy = false,
+    enabled = true,
+    opts = {
+      -- custom options here
+    },
+    config = function()
+      require("ts-error-translator").setup()
+    end,
   },
 }

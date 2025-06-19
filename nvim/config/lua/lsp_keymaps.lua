@@ -45,6 +45,7 @@ M.on_attach = function(bufnr)
     { "<leader>lf", vim.lsp.buf.format, desc = "Format" },
     { "<leader>li", require("telescope.builtin").lsp_implementations, desc = "Implementation" },
     { "<leader>lw", require("telescope.builtin").diagnostics, desc = "Diagnostics" },
+    { "<leader>le", vim.diagnostic.open_float, desc = "Floating Diagnostics" },
   })
 end
 
