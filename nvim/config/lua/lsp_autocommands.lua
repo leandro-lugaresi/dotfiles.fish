@@ -40,6 +40,24 @@ local has_clients_with_method = function(bufnr, method)
   return #clients > 0
 end
 
+vim.api.nvim_create_autocmd("InsertEnter", {
+  desc = "Disable lsp.inlay_hint when in insert mode",
+  callback = function(args)
+    local filter = { bufnr = args.buf }
+    local inlay_hint = vim.lsp.inlay_hint
+    if inlay_hint.is_enabled(filter) then
+      inlay_hint.enable(false, filter)
+      vim.api.nvim_create_autocmd("InsertLeave", {
+        once = true,
+        desc = "Re-enable lsp.inlay_hint when leaving insert mode",
+        callback = function()
+          inlay_hint.enable(true, filter)
+        end,
+      })
+    end
+  end,
+})
+
 -- Workaround for truncating long TypeScript inlay hints.
 -- TODO: Remove this if https://github.com/neovim/neovim/issues/27240 gets addressed.
 local inlay_hint_handler = vim.lsp.handlers[ms.textDocument_inlayHint]
