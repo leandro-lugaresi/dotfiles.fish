@@ -99,7 +99,10 @@ brew install \
   gnupg \
   pinentry-mac \
   overmind \
-  watchexec
+  watchexec \
+  hiddenbar \
+  koekeishiya/formulae/skhd \
+  koekeishiya/formulae/yabai
 ```
 
 On Ubuntu:
@@ -147,7 +150,6 @@ The system is set up to automatically switch between dark and light modes based 
 ![image](https://github.com/user-attachments/assets/e9eceaea-7f70-468f-9af6-d75d6b6a8fcb)
 
 ### dark theme and light theme
+
 ![image](https://github.com/user-attachments/assets/7e043310-a243-4565-ba39-6bf0a43c146e)
 ![image](https://github.com/user-attachments/assets/8273cfa6-6b48-45c2-ac21-e3e444475af2)
-
-
