@@ -111,6 +111,14 @@ function install_dotfiles
     or abort nvim
     link_file $DOTFILES_ROOT/yamllint/config $HOME/.config/yamllint/config backup
     or abort yamllint
+    link_file $DOTFILES_ROOT/claude/agents $HOME/.claude/agents backup
+    or abort claude_agents
+    link_file $DOTFILES_ROOT/claude/commmands $HOME/.claude/commands backup
+    or abort claude_commands
+    link_file $DOTFILES_ROOT/claude/CLAUDE.md $HOME/.claude/CLAUDE.md backup
+    or abort claude
+    link_file $DOTFILES_ROOT/claude/settings.json $HOME/.claude/settings.json backup
+    or abort claude_settings
 end
 
 curl -sL git.io/fisher | source && fisher install jorgebucaran/fisher

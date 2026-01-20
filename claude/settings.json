@@ -1,0 +1,27 @@
+{
+	"$schema": "https://json.schemastore.org/claude-code-settings.json",
+	"includeCoAuthoredBy": false,
+	"permissions": {
+		"defaultMode": "acceptEdits",
+		"allow": [
+			"Bash(bun test:*)",
+			"Bash(bun run test:*)",
+			"Bash(find:*)",
+			"Bash(grep:*)",
+			"Bash(ls:*)",
+			"Bash(mkdir:*)",
+			"Bash(rg:*)",
+			"Bash(gh issue view:*)",
+			"Bash(gh pr create:*)",
+			"Bash(go doc:*)",
+			"Bash(go get:*)",
+			"Bash(go build:*)",
+			"Bash(base64:*)",
+			"Bash(echo:*)"
+		],
+		"deny": ["Bash(git add .)", "Bash(git add -A)", "Bash(git add -p)"]
+	},
+	"feedbackSurveyState": {
+		"lastShownTime": 1754079422872
+	}
+}
