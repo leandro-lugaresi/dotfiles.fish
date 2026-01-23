@@ -26,8 +26,7 @@
 
 #### Subject Line
 - **Use conventional commit prefixes** (`feat:`, `fix:`, `chore:`, `docs:`, etc.)
-- **Start with a present-tense verb** (Add, Fix, Update, Refactor, Remove)
-- **Capitalize the first letter**
+- **Start with a present-tense verb** (add, update, refactor, remove)
 - **Do not end with a period**
 - **Keep under 50 characters**
 
@@ -47,7 +46,7 @@
 
 **Good:**
 ```
-feat: Add user authentication endpoint
+feat: add user authentication endpoint
 
 Implement /login route with email and password validation.
 Introduces bcrypt package for secure password hashing.
@@ -57,7 +56,7 @@ Fixes #123
 
 **Bad:**
 ```
-feat: add new login feature
+add new login feature
 ```
 ```
 fixed a bug
@@ -96,6 +95,11 @@ WIP
 </programming-language-specific-rules>
 
 <documentation>
+## Plan Mode
+
+- Make the plan extremely concise. Sacrifice grammar for the sake of concision.
+- At the end of each plan, give me a list of unresolved questions to answer, if any.
+
 ## Documentation & Reflection
 
 ### CLAUDE.md Creation

@@ -113,7 +113,7 @@ function install_dotfiles
     or abort yamllint
     link_file $DOTFILES_ROOT/claude/agents $HOME/.claude/agents backup
     or abort claude_agents
-    link_file $DOTFILES_ROOT/claude/commmands $HOME/.claude/commands backup
+    link_file $DOTFILES_ROOT/claude/commands $HOME/.claude/commands backup
     or abort claude_commands
     link_file $DOTFILES_ROOT/claude/CLAUDE.md $HOME/.claude/CLAUDE.md backup
     or abort claude
