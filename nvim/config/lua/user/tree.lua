@@ -1,4 +1,10 @@
 local tree = require("nvim-tree")
+local api = require("nvim-tree.api")
+
+local function on_attach(bufnr)
+  api.config.mappings.default_on_attach(bufnr)
+  vim.keymap.set("n", "<Esc>", api.tree.close, { buffer = bufnr, noremap = true, silent = true, desc = "Close tree" })
+end
 
 local function set_win()
   local ratio_h = 0.8
@@ -21,6 +27,7 @@ local function set_win()
 end
 
 tree.setup({
+  on_attach = on_attach,
   view = {
     centralize_selection = false,
     cursorline = true,
