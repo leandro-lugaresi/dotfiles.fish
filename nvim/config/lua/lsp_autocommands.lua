@@ -107,6 +107,7 @@ M.setup = function()
       if client == nil then
         return
       end
+      require("lsp_keymaps").on_attach(args.buf)
       if client.supports_method(ms.textDocument_inlayHint) then
         vim.lsp.inlay_hint.enable(true)
       end

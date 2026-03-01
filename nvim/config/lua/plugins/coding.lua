@@ -28,22 +28,14 @@ return {
 
       -- lsp
       "williamboman/mason-lspconfig.nvim",
-      "neovim/nvim-lspconfig",
       "stevearc/conform.nvim",
       "pmizio/typescript-tools.nvim",
 
       -- auto pairs/tags
       "windwp/nvim-autopairs",
       "windwp/nvim-ts-autotag",
-
-      -- hints
-      "simrat39/inlay-hints.nvim",
-
-      -- working with neovim config/plugins
-      "folke/neodev.nvim",
     },
     config = function()
-      require("neodev").setup({})
       require("nvim-autopairs").setup({ check_ts = true })
       require("nvim-ts-autotag").setup({ enable = true })
       require("user.lsp")

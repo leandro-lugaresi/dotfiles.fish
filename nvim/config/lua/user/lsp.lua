@@ -1,4 +1,3 @@
-local keymaps = require("lsp_keymaps")
 local capabilities = require("blink.cmp").get_lsp_capabilities({
   workspace = {
     didChangeWatchedFiles = {
@@ -11,27 +10,26 @@ local capabilities = require("blink.cmp").get_lsp_capabilities({
 require("lsp_autocommands").setup()
 require("mason").setup()
 require("mason-lspconfig").setup({
-  automatic_installation = true,
+  automatic_enable = true,
 })
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  keymaps.on_attach(bufnr)
-end
+-- Global defaults for all LSP servers
+vim.lsp.config("*", {
+  capabilities = capabilities,
+  root_markers = { ".git" },
+})
 
+-- typescript-tools is a separate plugin, not lspconfig
 require("typescript-tools").setup({
   capabilities = capabilities,
-  on_attach = on_attach,
   settings = {
     separate_diagnostic_server = true,
     expose_as_code_action = "all",
-    -- tsserver_plugins = {},
     tsserver_max_memory = "auto",
     complete_function_calls = true,
     include_completions_with_insert_text = true,
     tsserver_file_preferences = {
-      includeInlayParameterNameHints = "all", -- "none" | "literals" | "all";
+      includeInlayParameterNameHints = "all",
       includeInlayParameterNameHintsWhenArgumentMatchesName = true,
       includeInlayFunctionParameterTypeHints = true,
       includeInlayVariableTypeHints = true,
@@ -41,15 +39,12 @@ require("typescript-tools").setup({
       includeInlayEnumMemberValueHints = true,
       includeCompletionsForModuleExports = true,
       quotePreference = "auto",
-      -- autoImportFileExcludePatterns = { "node_modules/*", ".git/*" },
     },
   },
 })
 
-local lspconfig = require("lspconfig")
-lspconfig.gopls.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
+-- Per-server configs
+vim.lsp.config("gopls", {
   settings = {
     gopls = {
       gofumpt = true,
@@ -82,40 +77,17 @@ lspconfig.gopls.setup({
       semanticTokens = true,
     },
   },
-  flags = {
-    debounce_text_changes = 150,
-  },
 })
 
-for _, lsp in ipairs({
-  "bashls",
-  "clangd",
-  "cssls",
-  "jsonls",
-  "rust_analyzer",
-  "taplo",
-  "templ",
-  "terraformls",
-  "tflint",
-  "zls",
-}) do
-  lspconfig[lsp].setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-  })
-end
+vim.lsp.config("html", {
+  filetypes = { "html", "templ" },
+})
 
-for _, lsp in ipairs({ "html", "htmx" }) do
-  lspconfig[lsp].setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-    filetypes = { "html", "templ" },
-  })
-end
+vim.lsp.config("htmx", {
+  filetypes = { "html", "templ" },
+})
 
-lspconfig["dockerls"].setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
+vim.lsp.config("dockerls", {
   settings = {
     docker = {
       languageserver = {
@@ -127,9 +99,7 @@ lspconfig["dockerls"].setup({
   },
 })
 
-lspconfig.yamlls.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
+vim.lsp.config("yamlls", {
   settings = {
     yaml = {
       schemaStore = {
@@ -140,9 +110,7 @@ lspconfig.yamlls.setup({
   },
 })
 
-lspconfig.tailwindcss.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
+vim.lsp.config("tailwindcss", {
   filetypes = { "html", "templ", "javascript" },
   settings = {
     tailwindCSS = {
@@ -153,13 +121,7 @@ lspconfig.tailwindcss.setup({
   },
 })
 
--- Make runtime files discoverable to the server
-local runtime_path = vim.split(package.path, ";", {})
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-lspconfig.lua_ls.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
+vim.lsp.config("lua_ls", {
   settings = {
     Lua = {
       completion = {
@@ -171,6 +133,27 @@ lspconfig.lua_ls.setup({
       },
     },
   },
+})
+
+-- Enable all servers
+vim.lsp.enable({
+  "bashls",
+  "clangd",
+  "cssls",
+  "dockerls",
+  "gopls",
+  "html",
+  "htmx",
+  "jsonls",
+  "lua_ls",
+  "rust_analyzer",
+  "tailwindcss",
+  "taplo",
+  "templ",
+  "terraformls",
+  "tflint",
+  "yamlls",
+  "zls",
 })
 
 local float_config = {
