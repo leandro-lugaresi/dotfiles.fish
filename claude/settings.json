@@ -2,7 +2,6 @@
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "includeCoAuthoredBy": false,
   "permissions": {
-    "defaultMode": "acceptEdits",
     "allow": [
       "Bash(bun test:*)",
       "Bash(bun run test:*)",
@@ -23,10 +22,8 @@
       "Bash(git add .)",
       "Bash(git add -A)",
       "Bash(git add -p)"
-    ]
-  },
-  "feedbackSurveyState": {
-    "lastShownTime": 1754079422872
+    ],
+    "defaultMode": "acceptEdits"
   },
   "hooks": {
     "SessionStart": [
@@ -38,10 +35,25 @@
           }
         ]
       }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/LeandroLugaresi/.claude/hooks/gsd-context-monitor.js\""
+          }
+        ]
+      }
     ]
   },
   "statusLine": {
     "type": "command",
     "command": "node \"/Users/LeandroLugaresi/.claude/hooks/gsd-statusline.js\""
-  }
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "feedbackSurveyState": {
+    "lastShownTime": 1754079422872
+  },
+  "effortLevel": "medium"
 }
