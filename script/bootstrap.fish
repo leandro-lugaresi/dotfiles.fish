@@ -119,6 +119,14 @@ function install_dotfiles
     or abort claude
     link_file $DOTFILES_ROOT/claude/settings.json $HOME/.claude/settings.json backup
     or abort claude_settings
+
+    # Link each custom skill individually so other tools can also write to ~/.claude/skills/
+    mkdir -p $HOME/.claude/skills
+    for skill_dir in $DOTFILES_ROOT/agents/skills/*/
+        set skill_name (basename $skill_dir)
+        link_file $skill_dir $HOME/.claude/skills/$skill_name backup
+        or abort "claude_skill_$skill_name"
+    end
 end
 
 curl -sL git.io/fisher | source && fisher install jorgebucaran/fisher
