@@ -51,9 +51,12 @@
     "type": "command",
     "command": "node \"/Users/LeandroLugaresi/.claude/hooks/gsd-statusline.js\""
   },
+  "enabledPlugins": {
+    "typescript-lsp@claude-plugins-official": true
+  },
+  "voiceEnabled": true,
   "skipDangerousModePermissionPrompt": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754079422872
-  },
-  "effortLevel": "medium"
+  }
 }
