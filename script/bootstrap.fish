@@ -145,7 +145,7 @@ fisher update
 and success plugins
 or abort plugins
 
-yes | fish_config theme save "Catppuccin Mocha"
+yes | fish_config theme save catppuccin-mocha
 and success colorscheme
 or abort colorscheme
 
