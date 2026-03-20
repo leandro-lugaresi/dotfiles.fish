@@ -62,6 +62,8 @@ automatically-unhide-macos-hidden-apps = false
     1 = '^built-in retina display$'  # Case insensitive regex match
     2 = '^built-in retina display$'  # Case insensitive regex match
     3 = '^built-in retina display$'  # Case insensitive regex match
+    4 = '^built-in retina display$'  # Case insensitive regex match
+    5 = '^built-in retina display$'  # Case insensitive regex match
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -131,10 +133,9 @@ automatically-unhide-macos-hidden-apps = false
     cmd-alt-t = 'workspace T' # Terminal: Ghostty, iTerm2
     cmd-alt-c = 'workspace C' # Code: Zed, VS Code
     cmd-alt-b = 'workspace B' # Browser: Chrome
-    cmd-alt-m = 'workspace M' # Messaging: Slack, Zoom
     cmd-alt-a = 'workspace A' # AI: Claude Desktop
-    cmd-alt-d = 'workspace D' # Docs: Notion
-    cmd-alt-s = 'workspace S # Sound: Spotify, Music
+    cmd-alt-d = 'workspace D' # Docs & Comms: Notion, Slack
+    cmd-alt-s = 'workspace S' # Sound: Spotify, Music
     cmd-alt-r = 'workspace R' # General
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-1 = 'move-node-to-workspace 1'
@@ -149,7 +150,6 @@ automatically-unhide-macos-hidden-apps = false
     alt-shift-t = 'move-node-to-workspace T'
     alt-shift-c = 'move-node-to-workspace C'
     alt-shift-b = 'move-node-to-workspace B'
-    alt-shift-m = 'move-node-to-workspace M'
     alt-shift-a = 'move-node-to-workspace A'
     alt-shift-d = 'move-node-to-workspace D'
     alt-shift-s = 'move-node-to-workspace S'
@@ -212,14 +212,13 @@ run = 'move-node-to-workspace B'
 if.app-id = 'com.anthropic.claudefordesktop'
 run = 'move-node-to-workspace A'
 
-# M = Messaging
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
-run = 'move-node-to-workspace M'
+run = 'move-node-to-workspace D'
 
 [[on-window-detected]]
 if.app-id = 'us.zoom.xos'
-run = 'move-node-to-workspace M'
+run = 'move-node-to-workspace 1'
 
 # D = Docs
 [[on-window-detected]]
@@ -259,7 +258,7 @@ if.app-id = 'com.apple.Dictionary'
 run = 'layout floating'
 if.app-id = 'com.apple.DiskUtility'
 [[on-window-detected]]
-run = ['layout floating', 'move-node-to-workspace M']
+run = ['layout floating', 'move-node-to-workspace 1']
 if.app-id = 'com.apple.FaceTime'
 [[on-window-detected]]
 run = 'layout floating'
@@ -268,7 +267,7 @@ if.app-id = 'com.apple.Home'
 run = 'layout floating'
 if.app-id = 'com.apple.Maps'
 [[on-window-detected]]
-run = ['layout floating', 'move-node-to-workspace M']
+run = ['layout floating', 'move-node-to-workspace D']
 if.app-id = 'com.apple.MobileSMS'
 [[on-window-detected]]
 run = ['layout floating', 'move-node-to-workspace S']
@@ -355,7 +354,7 @@ if.app-id = 'com.apple.iWork.Pages'
 run = 'layout floating'
 if.app-id = 'com.apple.keychainaccess'
 [[on-window-detected]]
-run = ['layout floating', 'move-node-to-workspace M']
+run = ['layout floating', 'move-node-to-workspace D']
 if.app-id = 'com.apple.mail'
 [[on-window-detected]]
 run = ['layout floating', 'move-node-to-workspace S']
