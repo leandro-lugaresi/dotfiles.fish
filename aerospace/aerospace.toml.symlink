@@ -135,7 +135,7 @@ automatically-unhide-macos-hidden-apps = false
     cmd-alt-b = 'workspace B' # Browser: Chrome
     cmd-alt-a = 'workspace A' # AI: Claude Desktop
     cmd-alt-d = 'workspace D' # Docs & Comms: Notion, Slack
-    cmd-alt-s = 'workspace S' # Sound: Spotify, Music
+    cmd-alt-s = 'workspace S' # SQL: Beekeeper Studio
     cmd-alt-r = 'workspace R' # General
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-1 = 'move-node-to-workspace 1'
@@ -225,10 +225,14 @@ run = 'move-node-to-workspace 1'
 if.app-id = 'notion.id'
 run = 'move-node-to-workspace D'
 
-# S = Sound
+# S = SQL
+[[on-window-detected]]
+if.app-id = 'io.beekeeperstudio.desktop'
+run = 'move-node-to-workspace S'
+
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
-run = 'move-node-to-workspace S'
+run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
 run = 'layout floating'
@@ -270,7 +274,7 @@ if.app-id = 'com.apple.Maps'
 run = ['layout floating', 'move-node-to-workspace D']
 if.app-id = 'com.apple.MobileSMS'
 [[on-window-detected]]
-run = ['layout floating', 'move-node-to-workspace S']
+run = ['layout floating', 'move-node-to-workspace 2']
 if.app-id = 'com.apple.Music'
 [[on-window-detected]]
 run = ['layout floating', 'move-node-to-workspace D']
@@ -291,7 +295,7 @@ if.app-id = 'com.apple.QuickTimePlayerX'
 run = ['layout floating', 'move-node-to-workspace B']
 if.app-id = 'com.apple.Safari'
 [[on-window-detected]]
-run = ['layout floating', 'move-node-to-workspace S']
+run = ['layout floating', 'move-node-to-workspace 2']
 if.app-id = 'com.apple.TV'
 [[on-window-detected]]
 run = 'layout floating'
@@ -357,7 +361,7 @@ if.app-id = 'com.apple.keychainaccess'
 run = ['layout floating', 'move-node-to-workspace D']
 if.app-id = 'com.apple.mail'
 [[on-window-detected]]
-run = ['layout floating', 'move-node-to-workspace S']
+run = ['layout floating', 'move-node-to-workspace 2']
 if.app-id = 'com.apple.podcasts'
 [[on-window-detected]]
 run = 'layout floating'
