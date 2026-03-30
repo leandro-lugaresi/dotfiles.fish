@@ -25,7 +25,7 @@ set -g base-index 1
 setw -g pane-base-index 1
 
 # Auto restore tmux
-set -g @continuum-restore 'on'
+set -g @continuum-restore 'off'
 
 # Ensure window index numbers get reordered on delete.
 set-option -g renumber-windows on
