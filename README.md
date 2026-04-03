@@ -25,7 +25,7 @@ First, make sure you have all the following installed:
 Then, run these steps:
 
 ```console
-git clone https://github.com/leandro-lugaresi/dotfiles.fish.git ~/.dotfiles
+git clone git@github.com:leandro-lugaresi/dotfiles.fish.git ~/.dotfiles
 cd ~/.dotfiles
 ./script/bootstrap.fish
 ```
