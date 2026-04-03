@@ -99,7 +99,12 @@ brew install \
   gnupg \
   pinentry-mac \
   overmind \
-  watchexec
+  watchexec \
+  fnm \
+  chafa \
+  rust \
+  tree-sitter-cli \
+  lazygit
 ```
 
 On Ubuntu:
@@ -149,5 +154,3 @@ The system is set up to automatically switch between dark and light modes based 
 ### dark theme and light theme
 ![image](https://github.com/user-attachments/assets/7e043310-a243-4565-ba39-6bf0a43c146e)
 ![image](https://github.com/user-attachments/assets/8273cfa6-6b48-45c2-ac21-e3e444475af2)
-
-

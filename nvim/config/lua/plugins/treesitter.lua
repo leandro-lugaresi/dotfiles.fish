@@ -1,135 +1,136 @@
+local languages = {
+  "bash",
+  "cpp",
+  "css",
+  "diff",
+  "dockerfile",
+  "fish",
+  "git_rebase",
+  "gitattributes",
+  "gitcommit",
+  "gitignore",
+  "go",
+  "gomod",
+  "gowork",
+  "graphql",
+  "hcl",
+  "html",
+  "http",
+  "javascript",
+  "typescript",
+  "jq",
+  "json",
+  "lua",
+  "make",
+  "markdown",
+  "markdown_inline",
+  "nix",
+  "query",
+  "regex",
+  "rust",
+  "scss",
+  "sql",
+  "terraform",
+  "toml",
+  "vhs",
+  "vim",
+  "yaml",
+  "zig",
+}
+
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
     build = ":TSUpdate",
     event = "BufEnter",
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
       "nvim-treesitter/nvim-treesitter-context",
-      -- "nvim-treesitter/playground",
       "RRethy/nvim-treesitter-endwise",
-      "windwp/nvim-autopairs",
     },
     config = function()
-      require("nvim-treesitter.configs").setup({
-        highlight = {
-          enable = true,
-        },
-        indent = {
-          enable = true,
-        },
-        endwise = {
-          enable = true,
-        },
-        autopairs = {
-          enable = true,
-        },
-        context_commentstring = {
-          enable = true,
-          enable_autocmd = false,
-        },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = "<C-space>", -- maps in normal mode to init the node/scope selection with ctrl+space
-            node_incremental = "<C-space>", -- increment to the upper named parent
-            node_decremental = "<bs>", -- decrement to the previous node
-            scope_incremental = "<noop>", -- increment to the upper scope (as defined in locals.scm)
-          },
-        },
-        auto_install = false,
-        ensure_installed = {
-          "bash",
-          "cpp",
-          "css",
-          "diff",
-          "dockerfile",
-          "fish",
-          "git_rebase",
-          "gitattributes",
-          "gitcommit",
-          "gitignore", -- will require tree-sittter-cli
-          "go",
-          "gomod",
-          "gowork",
-          "graphql",
-          "hcl",
-          "html",
-          "http",
-          "javascript",
-          "typescript",
-          "jq",
-          "json",
-          "lua",
-          "make",
-          "markdown",
-          "markdown_inline",
-          "nix",
-          "query",
-          "regex",
-          "rust",
-          "scss",
-          "sql", -- will require tree-sittter-cli
-          "terraform",
-          "toml",
-          "vhs",
-          "vim",
-          "yaml",
-          "zig",
-        },
-        textobjects = {
-          enable = true,
-          swap = {
-            enable = true,
-            swap_next = {
-              ["<leader>a"] = "@parameter.inner",
-            },
-            swap_previous = {
-              ["<leader>A"] = "@parameter.inner",
-            },
-          },
-          move = {
-            enable = true,
-            set_jumps = true,
-            goto_next_start = {
-              ["]f"] = "@function.inner",
-              ["]p"] = "@parameter.inner",
-              ["]c"] = "@class.inner",
-            },
-            goto_next_end = {
-              ["]F"] = "@function.inner",
-              ["]P"] = "@parameter.inner",
-              ["]C"] = "@class.inner",
-            },
-            goto_previous_start = {
-              ["[f"] = "@function.inner",
-              ["[p"] = "@parameter.inner",
-              ["[c"] = "@class.inner",
-            },
-            goto_previous_end = {
-              ["[F"] = "@function.inner",
-              ["[P"] = "@parameter.inner",
-              ["[C"] = "@class.inner",
-            },
-          },
-          select = {
-            enable = true,
-            keymaps = {
-              ["af"] = "@function.outer",
-              ["if"] = "@function.inner",
+      require("nvim-treesitter").setup({})
+      require("nvim-treesitter").install(languages)
 
-              ["ac"] = "@conditional.outer",
-              ["ic"] = "@conditional.inner",
-
-              ["aa"] = "@parameter.outer",
-              ["ia"] = "@parameter.inner",
-
-              ["av"] = "@variable.outer",
-              ["iv"] = "@variable.inner",
-            },
-          },
-        },
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = languages,
+        callback = function()
+          vim.treesitter.start()
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
       })
+    end,
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
+    config = function()
+      require("nvim-treesitter-textobjects").setup({
+        select = { lookahead = true },
+        move = { set_jumps = true },
+      })
+
+      -- Select
+      local select_fn = function(query)
+        return function()
+          require("nvim-treesitter-textobjects.select").select_textobject(query, "textobjects")
+        end
+      end
+
+      vim.keymap.set({ "x", "o" }, "af", select_fn("@function.outer"))
+      vim.keymap.set({ "x", "o" }, "if", select_fn("@function.inner"))
+      vim.keymap.set({ "x", "o" }, "ac", select_fn("@conditional.outer"))
+      vim.keymap.set({ "x", "o" }, "ic", select_fn("@conditional.inner"))
+      vim.keymap.set({ "x", "o" }, "aa", select_fn("@parameter.outer"))
+      vim.keymap.set({ "x", "o" }, "ia", select_fn("@parameter.inner"))
+      vim.keymap.set({ "x", "o" }, "av", select_fn("@variable.outer"))
+      vim.keymap.set({ "x", "o" }, "iv", select_fn("@variable.inner"))
+
+      -- Move
+      local move = require("nvim-treesitter-textobjects.move")
+      local move_next = function(query)
+        return function()
+          move.goto_next_start(query, "textobjects")
+        end
+      end
+      local move_next_end = function(query)
+        return function()
+          move.goto_next_end(query, "textobjects")
+        end
+      end
+      local move_prev = function(query)
+        return function()
+          move.goto_previous_start(query, "textobjects")
+        end
+      end
+      local move_prev_end = function(query)
+        return function()
+          move.goto_previous_end(query, "textobjects")
+        end
+      end
+
+      vim.keymap.set({ "n", "x", "o" }, "]f", move_next("@function.inner"))
+      vim.keymap.set({ "n", "x", "o" }, "]p", move_next("@parameter.inner"))
+      vim.keymap.set({ "n", "x", "o" }, "]c", move_next("@class.inner"))
+      vim.keymap.set({ "n", "x", "o" }, "]F", move_next_end("@function.inner"))
+      vim.keymap.set({ "n", "x", "o" }, "]P", move_next_end("@parameter.inner"))
+      vim.keymap.set({ "n", "x", "o" }, "]C", move_next_end("@class.inner"))
+      vim.keymap.set({ "n", "x", "o" }, "[f", move_prev("@function.inner"))
+      vim.keymap.set({ "n", "x", "o" }, "[p", move_prev("@parameter.inner"))
+      vim.keymap.set({ "n", "x", "o" }, "[c", move_prev("@class.inner"))
+      vim.keymap.set({ "n", "x", "o" }, "[F", move_prev_end("@function.inner"))
+      vim.keymap.set({ "n", "x", "o" }, "[P", move_prev_end("@parameter.inner"))
+      vim.keymap.set({ "n", "x", "o" }, "[C", move_prev_end("@class.inner"))
+
+      -- Swap
+      vim.keymap.set("n", "<leader>a", function()
+        require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner")
+      end)
+      vim.keymap.set("n", "<leader>A", function()
+        require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.inner")
+      end)
     end,
   },
 }

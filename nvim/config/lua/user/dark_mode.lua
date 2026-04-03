@@ -3,7 +3,7 @@ local darkMode = require("auto-dark-mode")
 darkMode.setup({
   update_interval = 3000,
   set_dark_mode = function()
-    vim.cmd([[colorscheme catppuccin]])
+    vim.cmd([[colorscheme catppuccin-nvim]])
     require("user.colorscheme")
     require("lualine").setup({
       options = {
@@ -16,7 +16,7 @@ darkMode.setup({
     })
   end,
   set_light_mode = function()
-    vim.cmd([[colorscheme catppuccin]])
+    vim.cmd([[colorscheme catppuccin-nvim]])
     require("user.colorscheme")
     require("lualine").setup({
       options = {

@@ -122,7 +122,7 @@ return {
       require("user.harpoon")
     end,
   },
-  { "f-person/git-blame.nvim", event = "VeryLazy" },
+  { "f-person/git-blame.nvim",   event = "VeryLazy" },
   {
     "mbbill/undotree",
     cmd = "UndotreeToggle",
@@ -135,7 +135,7 @@ return {
     cmd = "NvimTreeToggle",
     keys = {
       { "<leader>tv", "<cmd>NvimTreeFindFileToggle<cr>", noremap = true, silent = true, desc = "nvim-tree Focus" },
-      { "<leader>tc", "<cmd>NvimTreeClose<cr>", noremap = true, silent = true, desc = "nvim-tree Close" },
+      { "<leader>tc", "<cmd>NvimTreeClose<cr>",          noremap = true, silent = true, desc = "nvim-tree Close" },
     },
     dependencies = {
       "nvim-tree/nvim-web-devicons",
@@ -150,14 +150,13 @@ return {
     opts = {},
   },
   { "asiryk/auto-hlsearch.nvim", event = "VeryLazy", config = true },
-  { "tpope/vim-abolish", event = "BufEnter" },
-  { "tpope/vim-repeat", event = "BufEnter" },
-  { "tpope/vim-eunuch", event = "BufEnter" },
-  { "tpope/vim-sleuth", event = "BufEnter" },
-  { "tpope/vim-speeddating", event = "BufEnter" },
+  { "tpope/vim-abolish",         event = "BufEnter" },
+  { "tpope/vim-repeat",          event = "BufEnter" },
+  { "tpope/vim-eunuch",          event = "BufEnter" },
+  { "tpope/vim-sleuth",          event = "BufEnter" },
+  { "tpope/vim-speeddating",     event = "BufEnter" },
   {
     "f-person/auto-dark-mode.nvim",
-    dev = true,
     config = function()
       require("user.dark_mode")
     end,
