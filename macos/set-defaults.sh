@@ -64,8 +64,14 @@ defaults write com.apple.dashboard mcx-disabled -bool true
 echo "  › Don't automatically rearrange Spaces based on most recent use"
 defaults write com.apple.dock mru-spaces -bool false
 
+echo "  › Each display gets its own independent set of Spaces"
+defaults write com.apple.spaces spans-displays -bool false
+
 echo "  › Increase the window resize speed for Cocoa applications"
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
+
+echo "  › Disable window open/close animations"
+defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
 
 echo "  › Disable smart quotes and smart dashes as they're annoying when typing code"
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
@@ -108,11 +114,22 @@ echo "  › Removing duplicates in the 'Open With' menu"
 
 echo ""
 echo "› Finder:"
+echo "  › Disable all Finder animations"
+defaults write com.apple.finder DisableAllAnimations -bool true
+
+echo "  › Show hidden files in Finder"
+defaults write com.apple.Finder AppleShowAllFiles -bool true
+
 echo "  › Always open everything in Finder's list view"
 defaults write com.apple.Finder FXPreferredViewStyle Nlsv
 
+echo "  › Search the current folder by default"
+defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+
 echo "  › Set the Finder prefs for showing a few different volumes on the Desktop"
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
 echo "  › Expand save panel by default"
