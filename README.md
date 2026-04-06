@@ -16,30 +16,48 @@ First, make sure you have all the following installed:
 
 - `git`: to clone the repository
 - `curl`: to download files
-- `tar`: to extract downloaded files
-- `fish`: the shell
 - `sudo`: some configurations may need that
 
 ### Install
 
-Then, run these steps:
-
 ```console
 git clone git@github.com:leandro-lugaresi/dotfiles.fish.git ~/.dotfiles
 cd ~/.dotfiles
-./script/bootstrap.fish
+./script/bootstrap.sh
 ```
 
-> All changed files were backed up with a `.backup` suffix.
+This will install Homebrew (if needed), all dependencies (CLI tools, casks, fonts), and start required services.
 
-#### Update
+### Sync configs
 
-To update, you need to `git pull` and run the bootstrap script again:
+After bootstrapping, or whenever you want to update symlinks and configs:
+
+```console
+./script/sync.fish
+```
+
+This sets up git config, symlinks all dotfiles, installs fish plugins, and sets fish as the default shell.
+
+> All changed files are backed up with a `.backup` suffix.
+
+### macOS defaults
+
+Apply macOS system preferences (Finder, Dock, keyboard, trackpad, etc.):
+
+```console
+./macos/set-defaults.sh
+```
+
+Log out and back in (or restart) for all changes to take effect.
+
+### Update
+
+To update, pull the latest changes and re-run sync:
 
 ```console
 cd ~/.dotfiles
-git pull origin master
-./script/bootstrap.fish
+git pull origin main
+./script/sync.fish
 ```
 
 ## Revert
@@ -52,84 +70,10 @@ configuration files:
 rm -rf ~/.dotfiles $__fish_config_dir
 ```
 
-The bootstrap script created a bunch of symbolic links that are now invalid.
+The sync script created a bunch of symbolic links that are now invalid.
 You will have to investigate those manually. In cases a file already existed,
-the `script/bootstrap.fish` script should have created a `.backup` file with
+the `script/sync.fish` script should have created a `.backup` file with
 the same name.
-
-## Recommended Software
-
-- [`Ghostty`](https://github.com/ghostty-org/ghostty) a fast, cross-platform terminal emulator;
-- [`bat`](https://github.com/sharkdp/bat) a cat(1) clone with wings;
-- [`delta`](https://github.com/dandavison/delta) for better git diffs;
-- [`fd`](https://github.com/sharkdp/fd) a simple, fast and user-friendly
-  alternative to `find`;
-- [`fzf`](https://github.com/junegunn/fzf) for a fuzzy-finder;
-- [`gum`](https://github.com/charmbracelet/gum) A tool for glamorous shell
-  scripts;
-- [`gh`](https://github.com/cli/cli) for more GitHub integration with the
-  terminal;
-- [`grc`](https://github.com/garabik/grc) to colorize command's outputs;
-- [`kubectx`](https://github.com/ahmetb/kubectx) for better Kubernetes context
-  and namespaces switch;
-- [`neovim`](https://neovim.io) extensible Vim-based text editor;
-- [`starship.rs`](https://starship.rs) the shell prompt we are using;
-- [`tms`](https://github.com/jrmoulton/tmux-sessionizer) A Tmux sessionizer
-
-To install them all with `brew`:
-
-```console
-brew install \
-  bat \
-  eza \
-  fd \
-  fish \
-  fzf \
-  gh \
-  git-delta \
-  grc \
-  kubectx \
-  neovim \
-  starship \
-  zoxide \
-  wezterm \
-  ghostty \
-  ripgrep \
-  gpg2 \
-  gnupg \
-  pinentry-mac \
-  overmind \
-  watchexec \
-  fnm \
-  chafa \
-  rust \
-  tree-sitter-cli \
-  lazygit
-```
-
-On Ubuntu:
-
-```console
-sh -c "$(curl -fsSL https://starship.rs/install.sh)"
-sudo apt install fish grc fzf zoxide fd-find exa bat alacritty kitty neovim
-# TODO: install delta, kubectx
-```
-
-After that, install the tmux-sessionizer:
-
-```bash
-cargo install tmux-sessionizer
-```
-
-## macOS defaults
-
-You use it by running:
-
-```console
-~/.dotfiles/macos/set-defaults.sh
-```
-
-And logging out and in again or restart.
 
 ## Themes and fonts
 

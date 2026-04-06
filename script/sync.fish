@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 #
-# bootstrap installs things.
+# sync links dotfiles and updates configs.
 
 set DOTFILES_ROOT (pwd -P)
 
@@ -23,7 +23,7 @@ end
 
 function on_exit -p %self
     if not contains $argv[3] 0
-        echo [(set_color --bold red) FAIL (set_color normal)] "Couldn't setup dotfiles, please open an issue at https://github.com/caarlos0/dotfiles"
+        echo [(set_color --bold red) FAIL (set_color normal)] "Couldn't setup dotfiles, please open an issue at https://github.com/leandro-lugaresi/dotfiles.fish"
     end
 end
 
@@ -119,6 +119,8 @@ function install_dotfiles
     or abort claude
     link_file $DOTFILES_ROOT/claude/settings.json $HOME/.claude/settings.json backup
     or abort claude_settings
+    link_file $DOTFILES_ROOT/sketchybar $HOME/.config/sketchybar backup
+    or abort sketchybar
 
     # Link each custom skill individually so other tools can also write to ~/.claude/skills/
     mkdir -p $HOME/.claude/skills
