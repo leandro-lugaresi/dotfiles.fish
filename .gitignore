@@ -3,3 +3,4 @@ dist
 .luarc.json
 claude/agents/gsd-*
 claude/commands/gsd/*
+.claude
