@@ -111,8 +111,6 @@ function install_dotfiles
     or abort nvim
     link_file $DOTFILES_ROOT/yamllint/config $HOME/.config/yamllint/config backup
     or abort yamllint
-    link_file $DOTFILES_ROOT/claude/agents $HOME/.claude/agents backup
-    or abort claude_agents
     link_file $DOTFILES_ROOT/claude/commands $HOME/.claude/commands backup
     or abort claude_commands
     link_file $DOTFILES_ROOT/claude/CLAUDE.md $HOME/.claude/CLAUDE.md backup
@@ -121,14 +119,6 @@ function install_dotfiles
     or abort claude_settings
     link_file $DOTFILES_ROOT/sketchybar $HOME/.config/sketchybar backup
     or abort sketchybar
-
-    # Link each custom skill individually so other tools can also write to ~/.claude/skills/
-    mkdir -p $HOME/.claude/skills
-    for skill_dir in $DOTFILES_ROOT/agents/skills/*/
-        set skill_name (basename $skill_dir)
-        link_file $skill_dir $HOME/.claude/skills/$skill_name backup
-        or abort "claude_skill_$skill_name"
-    end
 end
 
 curl -sL git.io/fisher | source && fisher install jorgebucaran/fisher
