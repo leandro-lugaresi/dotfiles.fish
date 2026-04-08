@@ -64,11 +64,14 @@ defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 echo "  › Disable Dashboard"
 defaults write com.apple.dashboard mcx-disabled -bool true
 
+echo "  › Group windows by application in Mission Control"
+defaults write com.apple.dock expose-group-apps -bool true
+
 echo "  › Don't automatically rearrange Spaces based on most recent use"
 defaults write com.apple.dock mru-spaces -bool false
 
 echo "  › Each display gets its own independent set of Spaces"
-defaults write com.apple.spaces spans-displays -bool false
+defaults write com.apple.spaces spans-displays -bool true
 
 echo "  › Increase the window resize speed for Cocoa applications"
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
@@ -86,6 +89,12 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 echo "  › Set up trackpad & mouse speed to a reasonable number"
 defaults write -g com.apple.trackpad.scaling 2
 defaults write -g com.apple.mouse.scaling 2.5
+
+echo "  › Enable tap to click"
+defaults write com.apple.AppleMultitouchTrackpad Clicking -int 1
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
 echo "  › Avoid the creation of .DS_Store files on network volumes"
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true

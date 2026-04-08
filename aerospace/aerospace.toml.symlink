@@ -6,7 +6,7 @@
 after-startup-command = []
 
 # Start AeroSpace at login
-start-at-login = false
+start-at-login = true
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
@@ -35,7 +35,7 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
 # Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-h key
 # Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
-automatically-unhide-macos-hidden-apps = false
+automatically-unhide-macos-hidden-apps = true
 
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
@@ -51,14 +51,21 @@ automatically-unhide-macos-hidden-apps = false
 #                 See:
 #                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-    inner.horizontal = 7
-    inner.vertical =   7
+	outer.top =        [{ monitor.'Built-in Retina Display' = 5} , 32]
+    inner.horizontal = 10
+    inner.vertical =   10
     outer.left =       5
-    outer.bottom =     5
-    outer.top =        5
+    outer.bottom =     4
     outer.right =      5
 
 [workspace-to-monitor-force-assignment]
+    T = 1
+    C = 1
+    B = 1
+    A = 1
+    D = 1
+    S = 1
+    R = 1
     1 = '^built-in retina display$'  # Case insensitive regex match
     2 = '^built-in retina display$'  # Case insensitive regex match
     3 = '^built-in retina display$'  # Case insensitive regex match
@@ -98,21 +105,25 @@ automatically-unhide-macos-hidden-apps = false
     # end tell'
     # '''
 
+    cmd-h = [] # Disable "hide application"
+    cmd-alt-h = [] # Disable "hide others"
+    alt-shift-f4 = 'exec-and-forget screencapture -i -c'
+
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
     cmd-alt-slash = 'layout tiles horizontal vertical'
     cmd-alt-comma = 'layout accordion horizontal vertical'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-    cmd-alt-h = 'focus left'
-    cmd-alt-n = 'focus down'
-    cmd-alt-e = 'focus up'
-    cmd-alt-i = 'focus right'
+    alt-shift-h = 'focus left'
+    alt-shift-n = 'focus down'
+    alt-shift-e = 'focus up'
+    alt-shift-i = 'focus right'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move
-    alt-shift-h = 'move left'
-    alt-shift-n = 'move down'
-    alt-shift-e = 'move up'
-    alt-shift-i = 'move right'
+    cmd-alt-shift-h = 'move left'
+    cmd-alt-shift-n = 'move down'
+    cmd-alt-shift-e = 'move up'
+    cmd-alt-shift-i = 'move right'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#resize
     cmd-alt-minus = 'resize smart -50'
@@ -125,10 +136,6 @@ automatically-unhide-macos-hidden-apps = false
     cmd-alt-3 = 'workspace 3'
     cmd-alt-4 = 'workspace 4'
     cmd-alt-5 = 'workspace 5'
-    cmd-alt-6 = 'workspace 6'
-    cmd-alt-7 = 'workspace 7'
-    cmd-alt-8 = 'workspace 8'
-    cmd-alt-9 = 'workspace 9'
     # Category workspaces (mnemonic)
     cmd-alt-t = 'workspace T' # Terminal: Ghostty, iTerm2
     cmd-alt-c = 'workspace C' # Code: Zed, VS Code
@@ -143,10 +150,6 @@ automatically-unhide-macos-hidden-apps = false
     alt-shift-3 = 'move-node-to-workspace 3'
     alt-shift-4 = 'move-node-to-workspace 4'
     alt-shift-5 = 'move-node-to-workspace 5'
-    alt-shift-6 = 'move-node-to-workspace 6'
-    alt-shift-7 = 'move-node-to-workspace 7'
-    alt-shift-8 = 'move-node-to-workspace 8'
-    alt-shift-9 = 'move-node-to-workspace 9'
     alt-shift-t = 'move-node-to-workspace T'
     alt-shift-c = 'move-node-to-workspace C'
     alt-shift-b = 'move-node-to-workspace B'
