@@ -228,6 +228,10 @@ run = 'move-node-to-workspace 1'
 if.app-id = 'notion.id'
 run = 'move-node-to-workspace D'
 
+[[on-window-detected]]
+if.app-id = 'md.obsidian'
+run = 'move-node-to-workspace D'
+
 # S = SQL
 [[on-window-detected]]
 if.app-id = 'io.beekeeperstudio.desktop'
