@@ -19,9 +19,9 @@ brew analytics off
 
 ## Taps
 echo "Tapping Brew..."
-brew tap FelixKratz/formulae
 brew tap jackielii/tap
 brew tap nikitabobko/tap
+brew tap 0xMassi/webclaw
 
 ## Formulae
 echo "Installing Brew Formulae..."
@@ -41,6 +41,7 @@ brew install jq
 brew install pinentry-mac
 brew install ripgrep
 brew install switchaudio-osx
+brew install webclaw
 brew install wget
 
 ### Terminal
@@ -57,7 +58,6 @@ brew install kubectx
 brew install lazygit
 brew install overmind
 brew install rust
-brew install svim
 brew install tree-sitter-cli
 brew install watchexec
 brew install --cask spotify
@@ -84,9 +84,5 @@ brew install --cask font-fira-code-nerd-font
 git clone git@github.com:shaunsingh/SFMono-Nerd-Font-Ligaturized.git /tmp/SFMono_Nerd_Font
 mv /tmp/SFMono_Nerd_Font/* "$HOME/Library/Fonts"
 rm -rf /tmp/SFMono_Nerd_Font/
-
-# Start Services
-echo "Starting Services (grant permissions)..."
-brew services start svim
 
 echo "Installation complete..."
