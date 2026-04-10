@@ -21,28 +21,7 @@
 		"deny": ["Bash(git add .)", "Bash(git add -A)", "Bash(git add -p)"],
 		"defaultMode": "acceptEdits"
 	},
-	"hooks": {
-		"SessionStart": [
-			{
-				"hooks": [
-					{
-						"type": "command",
-						"command": "node \"/Users/LeandroLugaresi/.claude/hooks/gsd-check-update.js\""
-					}
-				]
-			}
-		],
-		"PostToolUse": [
-			{
-				"hooks": [
-					{
-						"type": "command",
-						"command": "node \"/Users/LeandroLugaresi/.claude/hooks/gsd-context-monitor.js\""
-					}
-				]
-			}
-		]
-	},
+	"hooks": { },
 	"enabledPlugins": {
 		"typescript-lsp@claude-plugins-official": true
 	},
