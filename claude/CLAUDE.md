@@ -10,7 +10,7 @@
 - Never make assumptions of some env var or config existing. ALWAYS do a web search, first with your built in tools, then with perplexity
 
 ### Search Tools
-- Use `rg` (ripgrep) instead of `grep`
+- For any file search or grep in the current git indexed directory use fff tools
 </general-behavior>
 
 <git-practices>
