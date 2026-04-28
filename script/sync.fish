@@ -119,6 +119,8 @@ function install_dotfiles
     or abort claude_settings
     link_file $DOTFILES_ROOT/sketchybar $HOME/.config/sketchybar backup
     or abort sketchybar
+    link_file $DOTFILES_ROOT/zed $HOME/.config/zed backup
+    or abort zed
 end
 
 curl -sL git.io/fisher | source && fisher install jorgebucaran/fisher

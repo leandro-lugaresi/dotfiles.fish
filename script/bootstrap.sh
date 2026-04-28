@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+DOTFILES_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
+
 if [[ "$(uname)" != "Darwin" ]]; then
     exit 0
 fi
@@ -15,70 +17,17 @@ if ! command -v brew &>/dev/null; then
     echo "Installing Brew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
+
+if [[ -x /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x /usr/local/bin/brew ]]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+fi
+
 brew analytics off
 
-## Taps
-echo "Tapping Brew..."
-brew tap jackielii/tap
-brew tap nikitabobko/tap
-brew tap 0xMassi/webclaw
-
-## Formulae
-echo "Installing Brew Formulae..."
-### Essentials
-brew install aerospace
-brew install bat
-brew install blueutil
-brew install eza
-brew install fd
-brew install fzf
-brew install fnm
-brew install gh
-brew install git-delta
-brew install gnupg
-brew install ifstat
-brew install jq
-brew install pinentry-mac
-brew install ripgrep
-brew install switchaudio-osx
-brew install webclaw
-brew install wget
-
-### Terminal
-brew install fish
-brew install grc
-brew install neovim
-brew install starship
-brew install zoxide
-
-### Nice to have
-brew install btop
-brew install chafa
-brew install kubectx
-brew install lazygit
-brew install overmind
-brew install rust
-brew install tree-sitter-cli
-brew install watchexec
-brew install --cask spotify
-
-## Casks
-echo "Installing Brew Casks..."
-### Terminals & Browsers
-brew install --cask ghostty
-brew install --cask wezterm
-# brew install --cask zen
-
-### Office
-brew install --cask zoom
-brew install --cask meetingbar
-brew install --cask vlc
-
-### Fonts
-brew install --cask sf-symbols
-brew install --cask font-hack-nerd-font
-brew install --cask font-jetbrains-mono-nerd-font
-brew install --cask font-fira-code-nerd-font
+echo "Installing Brew bundle..."
+brew bundle --file="$DOTFILES_ROOT/Brewfile"
 
 # Installing Fonts
 git clone git@github.com:shaunsingh/SFMono-Nerd-Font-Ligaturized.git /tmp/SFMono_Nerd_Font
