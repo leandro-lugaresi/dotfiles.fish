@@ -1,26 +1,91 @@
 [
-	{
-		"context": "Workspace",
-		"bindings": {
-			"shift shift": "file_finder::Toggle",
-		},
-	},
-	{
-		"context": "Terminal",
-		"bindings": {
-			"shift-enter": ["terminal::SendText", "\u001b\r"],
-			"ctrl-a": null,
-			"ctrl-s": null,
-			"ctrl-d": null,
-			"ctrl-e": null,
-			"ctrl-z": null,
-			"ctrl-x": null,
-			"ctrl-f": null,
-		},
-	},
-	{
-		"bindings": {
-			"cmd-shift-e": "project_panel::Toggle",
-		},
-	},
+  {
+    "context": "Workspace",
+    "bindings": {
+      "shift shift": "file_finder::Toggle",
+    },
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "shift-enter": ["terminal::SendText", "\u001b\r"],
+      "ctrl-a": null,
+      "ctrl-s": null,
+      "ctrl-d": null,
+      "ctrl-e": null,
+      "ctrl-z": null,
+      "ctrl-x": null,
+      "ctrl-f": null,
+    },
+  },
+  {
+    "bindings": {
+      "cmd-shift-e": "project_panel::Toggle",
+    },
+  },
+  {
+    "bindings": {
+      "cmd-shift-t": "terminal_panel::Toggle",
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "ctrl-`": "terminal_panel::Toggle",
+    },
+  },
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      "cmd-m cmd-e": [
+        "task::Spawn",
+        {
+          "task_name": "edit crp",
+        },
+      ],
+      "cmd-m cmd-m": [
+        "task::Spawn",
+        {
+          "task_name": "save crp",
+        },
+      ],
+      "alt-a": ["task::Spawn", { "task_name": "open crp 1" }],
+      "alt-r": ["task::Spawn", { "task_name": "open crp 2" }],
+      "alt-s": ["task::Spawn", { "task_name": "open crp 3" }],
+      "alt-t": ["task::Spawn", { "task_name": "open crp 4" }],
+      "alt-d": ["task::Spawn", { "task_name": "open crp 5" }],
+    },
+  },
+  {
+    "unbind": {
+      "cmd-m": "zed::Minimize",
+    },
+  },
+  {
+    "bindings": {
+      "cmd-shift-right": "panel::NextPanelTab",
+    },
+  },
+  {
+    "context": "TabSwitcher",
+    "bindings": {
+      "d": "tab_switcher::CloseSelectedItem",
+    },
+  },
+  {
+    "context": "TabSwitcher",
+    "unbind": {
+      "ctrl-backspace": "tab_switcher::CloseSelectedItem",
+    },
+  },
+  {
+    "context": "Terminal||Editor",
+    "bindings": {
+      "cmd-1": ["pane::ActivateItem", 0],
+      "cmd-2": ["pane::ActivateItem", 1],
+      "cmd-3": ["pane::ActivateItem", 2],
+      "cmd-4": ["pane::ActivateItem", 3],
+      "cmd-5": ["pane::ActivateItem", 4],
+    },
+  },
 ]

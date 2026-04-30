@@ -8,7 +8,12 @@ end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
+max_line_length = 120
 
 [{*.md,*.yml,*.lua}]
 indent_style = space
 indent_size = 2
+
+[*.{ts,js,tsx,jsx,cjs,json,d.ts,graphql,mjs,mts}]
+indent_size = 2
+indent_style = space

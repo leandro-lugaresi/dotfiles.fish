@@ -1,0 +1,52 @@
+// Project tasks configuration. See https://zed.dev/docs/tasks for documentation.
+
+[
+  {
+    "label": "save crp",
+    "command": "mkdir -p scratchpad && printf '%s\n' \"$ZED_RELATIVE_FILE\" >> scratchpad/harpoon.txt",
+    "reveal": "never",
+    "hide": "always",
+  },
+  {
+    "label": "open crp 1",
+    "command": "cat scratchpad/harpoon.txt | sed -n '1p' | xargs zed",
+    "shell": "system",
+    "reveal": "never",
+    "hide": "always",
+  },
+  {
+    "label": "open crp 2",
+    "command": "cat scratchpad/harpoon.txt | sed -n '2p' | xargs zed",
+    "shell": "system",
+    "reveal": "never",
+    "hide": "always",
+  },
+  {
+    "label": "open crp 3",
+    "command": "cat scratchpad/harpoon.txt | sed -n '3p' | xargs zed",
+    "shell": "system",
+    "reveal": "never",
+    "hide": "always",
+  },
+  {
+    "label": "open crp 4",
+    "command": "cat scratchpad/harpoon.txt | sed -n '4p' | xargs zed",
+    "shell": "system",
+    "reveal": "never",
+    "hide": "always",
+  },
+  {
+    "label": "open crp 5",
+    "command": "cat scratchpad/harpoon.txt | sed -n '5p' | xargs zed",
+    "shell": "system",
+    "reveal": "never",
+    "hide": "always",
+  },
+  {
+    "label": "edit crp",
+    "command": "zed scratchpad/harpoon.txt",
+    "shell": "system",
+    "reveal": "never",
+    "hide": "always",
+  },
+]

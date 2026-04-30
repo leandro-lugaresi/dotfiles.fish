@@ -20,3 +20,4 @@ coverage.txt
 *.Procfile
 Procfile.*
 .overmind.env
+scratchpad/

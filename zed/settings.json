@@ -7,49 +7,82 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-	"outline_panel": {
-		"dock": "right",
-	},
-	"collaboration_panel": {
-		"dock": "right",
-	},
-	"agent": {
-		"dock": "left",
-		"favorite_models": [],
-		"model_parameters": [],
-	},
-	"project_panel": {
-		"dock": "right",
-		"hide_root": true,
-		"git_status_indicator": false,
-	},
-	"git_panel": {
-		"dock": "right",
-		"tree_view": false,
-	},
-	"buffer_font_family": "FiraCode Nerd Font Mono",
-	"buffer_font_features": {
-		"calt": true,
-	},
-	"terminal": {
-		"dock": "right",
-		"font_family": "Hack Nerd Font Mono",
-		"shell": "system",
-	},
-	"icon_theme": {
-		"mode": "system",
-		"light": "Zed (Default)",
-		"dark": "Zed (Default)",
-	},
-	"vim_mode": true,
-	"session": {
-		"trust_all_worktrees": true,
-	},
-	"ui_font_size": 16,
-	"buffer_font_size": 16.0,
-	"theme": {
-		"mode": "system",
-		"light": "Ayu Light",
-		"dark": "Tokyo Night",
-	},
+  "inlay_hints": {
+    "enabled": true,
+  },
+  "tab_size": 2,
+  "vim": {
+    "use_smartcase_find": true,
+    "toggle_relative_line_numbers": true,
+  },
+  "minimap": {
+    "show": "never",
+  },
+  "diagnostics": {
+    "inline": {
+      "enabled": true,
+    },
+  },
+  "languages": {
+    "TypeScript": {
+      "tab_size": 2,
+    },
+    "JSONC": {
+      "tab_size": 2,
+    },
+    "JavaScript": {
+      "tab_size": 2,
+    },
+    "JSON": {
+      "tab_size": 2,
+    },
+  },
+  "outline_panel": {
+    "git_status": true,
+    "dock": "right",
+  },
+  "collaboration_panel": {
+    "dock": "right",
+  },
+  "agent": {
+    "button": false,
+    "dock": "left",
+    "favorite_models": [],
+    "model_parameters": [],
+  },
+  "project_panel": {
+    "dock": "right",
+    "hide_root": true,
+    "git_status_indicator": false,
+  },
+  "git_panel": {
+    "button": false,
+    "dock": "right",
+    "tree_view": false,
+  },
+  "buffer_font_family": "FiraCode Nerd Font Mono",
+  "buffer_font_features": {
+    "calt": true,
+  },
+  "terminal": {
+    "dock": "right",
+    "font_family": "Hack Nerd Font Mono",
+    "shell": "system",
+  },
+  "icon_theme": {
+    "mode": "system",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)",
+  },
+  "vim_mode": true,
+  "session": {
+    "trust_all_worktrees": true,
+  },
+  "ui_font_size": 16,
+  "buffer_font_size": 16.0,
+  "theme": {
+    "mode": "system",
+    "light": "Tokyo Night Light",
+    "dark": "Tokyo Night Moon",
+  },
 }

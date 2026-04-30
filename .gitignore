@@ -4,3 +4,5 @@ dist
 claude/agents/gsd-*
 claude/commands/gsd/*
 .claude
+zed/prompts/
+zed/themes/

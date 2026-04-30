@@ -11,6 +11,10 @@ indent_size = 4
 indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
+max_line_length = 120
+
+[Makefile]
+indent_style = tab
 
 [*.{go}]
 indent_size = 4
@@ -27,4 +31,3 @@ indent_size = 2
 [*.{ts,js,tsx,jsx,cjs,json,d.ts,graphql,mjs,mts}]
 indent_size = 2
 indent_style = space
-
