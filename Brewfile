@@ -27,6 +27,9 @@ brew "neovim"
 brew "starship"
 brew "zoxide"
 
+# AI
+brew "rtk"
+
 # Nice to have
 brew "btop"
 brew "chafa"

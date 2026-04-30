@@ -121,6 +121,8 @@ function install_dotfiles
     or abort sketchybar
     link_file $DOTFILES_ROOT/zed $HOME/.config/zed backup
     or abort zed
+    link_file $DOTFILES_ROOT/opencode $HOME/.config/opencode backup
+    or abort zed
 end
 
 curl -sL git.io/fisher | source && fisher install jorgebucaran/fisher
