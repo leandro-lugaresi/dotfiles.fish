@@ -88,4 +88,16 @@
       "cmd-5": ["pane::ActivateItem", 4],
     },
   },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-space": "editor::ShowCompletions"
+    }
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "ctrl-space": "editor::ShowCompletions"
+    }
+  }
 ]
