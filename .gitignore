@@ -6,3 +6,4 @@ claude/commands/gsd/*
 .claude
 zed/prompts/
 zed/themes/
+node_modules
