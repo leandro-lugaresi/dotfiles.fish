@@ -11,6 +11,10 @@
   "hide_mouse": "never",
   "inlay_hints": {
     "enabled": true,
+    "show_parameter_hints": true,
+    "show_type_hints": false,
+    "show_value_hints": true,
+    "show_other_hints": true,
   },
   "tab_size": 2,
   "vim": {
