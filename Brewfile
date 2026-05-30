@@ -19,6 +19,7 @@ brew "ripgrep"
 brew "switchaudio-osx"
 brew "webclaw"
 brew "wget"
+brew "just"
 
 # Terminal
 brew "fish"
@@ -26,6 +27,8 @@ brew "grc"
 brew "neovim"
 brew "starship"
 brew "zoxide"
+brew "tmux"
+brew "tmux-sessionizer"
 
 # AI
 brew "rtk"
@@ -47,6 +50,7 @@ cask "wezterm"
 cask "zed"
 
 # Office & media
+cask "bettershot"
 cask "meetingbar"
 cask "spotify"
 cask "vlc"
