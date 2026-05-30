@@ -19,5 +19,5 @@
     "ignore": [".git/**", "node_modules/**", ".turbo/**", "dist/**", "build/**"]
   },
   "command": {},
-  "plugin": ["oh-my-openagent@latest", "./plugins/effect-ts.ts"]
+  "plugin": ["oh-my-openagent@latest", "./plugins/effect-ts.ts", "./plugins/rtk.ts", "./plugins/local-bin-path.ts"]
 }

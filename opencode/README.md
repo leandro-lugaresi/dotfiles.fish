@@ -15,6 +15,8 @@ Global OpenCode setup with a primary orchestration workflow, automatic routing t
   - agent definitions used by the workflow
 - `plugins/rtk.ts`
   - plugin that rewrites shell commands with `rtk` to save tokens
+- `plugins/local-bin-path.ts`
+  - plugin that prepares shell commands with the local project environment
 - `tools/workflow-route.ts`
   - deterministic task router for subagents
 - `WORKFLOW_DIAGRAM.md`
@@ -330,6 +332,17 @@ Goal:
 - keep a single source of truth for command rewrite rules inside `rtk`
 
 If `rtk` is not available in `PATH`, the plugin disables itself without breaking the session.
+
+## Local Shell Environment Plugin
+
+`plugins/local-bin-path.ts` prepares shell executions before they run.
+
+Behavior:
+
+- prepends `node_modules/.bin` from the command working directory to `PATH`
+- when the working directory contains `.nvmrc`, runs `fnm use --install-if-missing` before the requested shell command
+
+This keeps agent shell commands on the project Node version instead of the default global version.
 
 ## `workflow-route` Tool
 
