@@ -13,10 +13,8 @@ Global OpenCode setup with a primary orchestration workflow, automatic routing t
   - global communication rule set in ultra-terse mode
 - `agents/`
   - agent definitions used by the workflow
-- `plugins/rtk.ts`
-  - plugin that rewrites shell commands with `rtk` to save tokens
 - `plugins/local-bin-path.ts`
-  - plugin that prepares shell commands with the local project environment
+  - plugin that prepares shell commands with `rtk`, `fnm`, and local project binaries
 - `tools/workflow-route.ts`
   - deterministic task router for subagents
 - `WORKFLOW_DIAGRAM.md`
@@ -322,27 +320,19 @@ Runtime note:
 - `gpt-critic` uses `reasoningEffort: medium`
 - this is intentional to reduce 5-hour window pressure compared with `xhigh`
 
-## `rtk` Plugin
-
-`plugins/rtk.ts` intercepts `bash` / `shell` calls and tries to rewrite the command through `rtk rewrite`.
-
-Goal:
-
-- reduce tokens spent on verbose shell commands
-- keep a single source of truth for command rewrite rules inside `rtk`
-
-If `rtk` is not available in `PATH`, the plugin disables itself without breaking the session.
-
 ## Local Shell Environment Plugin
 
 `plugins/local-bin-path.ts` prepares shell executions before they run.
 
 Behavior:
 
+- rewrites the requested command through `rtk rewrite` when `rtk` is available
 - prepends `node_modules/.bin` from the command working directory to `PATH`
 - when the working directory contains `.nvmrc`, runs `fnm use --install-if-missing` before the requested shell command
 
-This keeps agent shell commands on the project Node version instead of the default global version.
+The command preparation order is intentional: `rtk` rewrites the original command first, then the plugin prepends the `fnm` setup. This avoids `rtk` seeing the multi-line setup wrapper as the command to rewrite.
+
+This keeps agent shell commands compact and on the project Node version instead of the default global version.
 
 ## `workflow-route` Tool
 
