@@ -57,7 +57,7 @@
     "model_parameters": [],
   },
   "project_panel": {
-    "dock": "right",
+    "dock": "left",
     "hide_root": true,
     "git_status_indicator": false,
   },
@@ -88,7 +88,7 @@
   "buffer_font_size": 16.0,
   "theme": {
     "mode": "system",
-    "light": "Tokyo Night Light",
-    "dark": "Tokyo Night Moon",
+    "light": "Catppuccin Latte",
+    "dark": "Catppuccin Mocha",
   },
 }

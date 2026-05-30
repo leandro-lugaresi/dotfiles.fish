@@ -19,6 +19,7 @@ coverage.txt
 *.log
 *.Procfile
 Procfile.*
+Procfile
 .overmind.env
 scratchpad/
 .sisyphus

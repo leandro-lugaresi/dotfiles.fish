@@ -294,9 +294,6 @@ run = 'layout floating'
 if.app-id = 'com.apple.Photos'
 [[on-window-detected]]
 run = 'layout floating'
-if.app-id = 'com.apple.Preview'
-[[on-window-detected]]
-run = 'layout floating'
 if.app-id = 'com.apple.QuickTimePlayerX'
 [[on-window-detected]]
 run = ['layout floating', 'move-node-to-workspace B']
