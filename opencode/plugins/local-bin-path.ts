@@ -12,10 +12,12 @@ if [ -f .nvmrc ]; then
   fnm use --install-if-missing >/dev/null || exit $?
 fi`
 
-// Ensures local node_modules binaries are available in PATH for all shell
-// executions (main agent, subagents, and user terminals). Fixes issues where
-// tools like biome are called as global executables instead of the local copy.
-export const LocalBinPathPlugin: Plugin = async () => {
+// Prepares shell executions for project-local command behavior: rewrite commands
+// through rtk, switch Node versions through fnm when .nvmrc exists, and prefer
+// local node_modules binaries over global executables.
+export const LocalBinPathPlugin: Plugin = async ({ $ }) => {
+  const hasRtk = await $`which rtk`.quiet().nothrow().then((result) => result.exitCode === 0)
+
   return {
     "tool.execute.before": async (input, output) => {
       const tool = String(input?.tool ?? "").toLowerCase()
@@ -27,7 +29,9 @@ export const LocalBinPathPlugin: Plugin = async () => {
       const command = (args as Record<string, unknown>).command
       if (typeof command !== "string" || !command || command.includes(FNM_USE_MARKER)) return
 
-      ;(args as Record<string, unknown>).command = `${fnmUseIfNvmrc}\n${command}`
+      const preparedCommand = hasRtk ? await rewriteWithRtk($, command) : command
+
+      ;(args as Record<string, unknown>).command = `${fnmUseIfNvmrc}\n${preparedCommand}`
     },
     "shell.env": async (input, output) => {
       const localBin = `${input.cwd}/node_modules/.bin`
@@ -39,5 +43,15 @@ export const LocalBinPathPlugin: Plugin = async () => {
         output.env.PATH = `${localBin}:${existingPath}`
       }
     },
+  }
+}
+
+async function rewriteWithRtk($: Parameters<Plugin>[0]["$"], command: string) {
+  try {
+    const result = await $`rtk rewrite ${command}`.quiet().nothrow()
+    const rewritten = String(result.stdout).trim()
+    return rewritten || command
+  } catch {
+    return command
   }
 }
