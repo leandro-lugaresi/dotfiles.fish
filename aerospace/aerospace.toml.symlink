@@ -210,6 +210,10 @@ run = 'move-node-to-workspace C'
 if.app-id = 'com.google.Chrome'
 run = 'move-node-to-workspace B'
 
+[[on-window-detected]]
+if.app-id = 'app.zen-browser.zen'
+run = 'move-node-to-workspace B'
+
 # A = AI
 [[on-window-detected]]
 if.app-id = 'com.anthropic.claudefordesktop'
@@ -230,6 +234,10 @@ run = 'move-node-to-workspace D'
 
 [[on-window-detected]]
 if.app-id = 'md.obsidian'
+run = 'move-node-to-workspace D'
+
+[[on-window-detected]]
+if.app-id = 'com.adibhanna.zennotes'
 run = 'move-node-to-workspace D'
 
 # S = SQL
