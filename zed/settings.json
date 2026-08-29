@@ -1,4 +1,5 @@
 {
+  "format_on_save": "on",
   "cli_default_open_behavior": "existing_window",
   "agent_servers": {
     "opencode": {
@@ -33,27 +34,29 @@
     },
     "TypeScript": {
       "tab_size": 2,
-      "formatter": { "language_server": { "name": "biome" } },
+      "formatter": { "language_server": { "name": "dprint" } },
     },
     "JSONC": {
       "tab_size": 2,
-      "formatter": { "language_server": { "name": "biome" } },
+      "formatter": { "language_server": { "name": "dprint" } },
     },
     "JavaScript": {
       "tab_size": 2,
-      "formatter": { "language_server": { "name": "biome" } },
+      "formatter": { "language_server": { "name": "dprint" } },
     },
     "JSON": {
       "tab_size": 2,
-      "formatter": { "language_server": { "name": "biome" } },
+      "formatter": { "language_server": { "name": "dprint" } },
     },
   },
   "lsp": {
-    "biome": {
-      "settings": {
-        "require_config_file": true,
-      },
-    },
+    "dprint": {
+      "binary": {
+        "path": "/opt/homebrew/bin/dprint",
+        "arguments": ["lsp"],
+        "ignore_system_version": false
+      }
+    }
   },
   "outline_panel": {
     "git_status": true,

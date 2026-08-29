@@ -40,7 +40,7 @@ automatically-unhide-macos-hidden-apps = true
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]
-    preset = 'colemak'
+    preset = 'qwerty'
 
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
 # Possible values:
@@ -59,13 +59,13 @@ automatically-unhide-macos-hidden-apps = true
     outer.right =      5
 
 [workspace-to-monitor-force-assignment]
-    T = 1
-    C = 1
-    B = 1
-    A = 1
-    D = 1
-    S = 1
-    R = 1
+    T = [1,'^built-in retina display$']
+    C = [1,'^built-in retina display$']
+    B = [1,'^built-in retina display$']
+    A = [1,'^built-in retina display$']
+    D = [1,'^built-in retina display$']
+    S = [1,'^built-in retina display$']
+    R = [1,'^built-in retina display$']
     1 = '^built-in retina display$'  # Case insensitive regex match
     2 = '^built-in retina display$'  # Case insensitive regex match
     3 = '^built-in retina display$'  # Case insensitive regex match

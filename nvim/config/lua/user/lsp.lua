@@ -154,6 +154,7 @@ vim.lsp.enable({
   "tflint",
   "yamlls",
   "zls",
+  "oxlint"
 })
 
 local float_config = {
