@@ -48,6 +48,7 @@ cask "nikitabobko/tap/aerospace"
 cask "ghostty"
 cask "wezterm"
 cask "zed"
+cask "dbx"
 
 # Office & media
 cask "bettershot"
