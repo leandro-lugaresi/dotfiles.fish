@@ -1,30 +1,35 @@
 # OpenCode
 
-Personal OpenCode configuration using [Oh My OpenAgent](https://github.com/ohmyopencodes/openagent) for orchestration.
+Personal OpenCode V2 configuration. Oh My OpenCode Slim handles
+orchestration across `opencode-go/*` models; specialised agents (oracle,
+librarian, designer, fixer) are configured in `oh-my-opencode-slim.json`.
 
 ## Setup
 
-- **Default agent**: `sisyphus`
-- **Provider**: `opencode-go/*`
-- **Model**: `opencode-go/kimi-k2.6`
-- **Routing/fallbacks**: `oh-my-openagent.json`
+- **CLI**: `opencode2` (V2; install via the `beta` distribution)
+- **Default model**: `opencode-go/kimi-k2.6`
+- **Small model**: `opencode-go/deepseek-v4-flash` (used by the `title` agent)
+- **Routing/fallbacks**: `oh-my-opencode-slim.json`
+- **Cyberdeck overlay**: `cyberdeck.json` (loaded by the `plugins/cyberdeck` plugin)
 
 ## Files
 
 | File | Purpose |
 |------|---------|
-| `opencode.json` | Main config, models, MCP servers, plugins |
-| `AGENTS.md` | Global agent behavior rules |
-| `oh-my-openagent.json` | Oh My OpenAgent routing and agent definitions |
-| `plugins/` | Custom plugins (`effect-ts`, `local-bin-path`) |
+| `opencode.json` | Server + project config (V2 native shape) |
+| `cli.json` | Terminal-client config (theme, attention, diffs) — V2 global format |
+| `oh-my-opencode-slim.json` | Slim preset configuration (orchestrator, oracle, librarian, ...) |
+| `cyberdeck.json` | Cyberdeck plugin overlay (presets, council, fallbacks) |
+| `AGENTS.md` | Global agent behaviour rules |
+| `commands/` | Custom commands (plannotator) |
+| `plugins/` | Local plugins (`effect-ts`, `local-bin-path`) + symlinked `cyberdeck` |
 | `skills/` | Installed agent skills |
 
 ## Installation
 
-Prerequisites: OpenCode CLI installed and authenticated.
+Prerequisites: `opencode2` CLI installed and authenticated.
 
 ```bash
-# Link into ~/.config
 mkdir -p ~/.config/opencode
 rsync -a opencode/ ~/.config/opencode/
 cd ~/.config/opencode && bun install
@@ -33,13 +38,15 @@ cd ~/.config/opencode && bun install
 Verify:
 
 ```bash
-opencode debug config
-opencode agent list
+opencode2 debug config
+opencode2 agent list
+opencode2 service status
 ```
 
 ## Usage
 
-Just use `auto` — Oh My OpenAgent handles routing to the right specialist automatically.
+Just use the default orchestrator — Oh My OpenCode Slim routes each task to
+the right specialist automatically.
 
-- Default to `auto` for everything
-- Use manual commands (e.g. `/code`, `/plan`, `/review`) only when you want to force a specific path
+- Default to the orchestrator for everything
+- Override per-task with manual commands only when you need to force a path

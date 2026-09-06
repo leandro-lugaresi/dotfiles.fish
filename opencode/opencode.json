@@ -1,23 +1,46 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "mcp": {
-    "fff": {
-      "type": "local",
-      "command": ["fff-mcp"],
-      "enabled": true
-    }
-  },
   "model": "opencode-go/kimi-k2.6",
   "small_model": "opencode-go/deepseek-v4-flash",
-  "default_agent": "auto",
+  "lsp": true,
+  "watcher": {
+    "ignore": [
+      ".git/**",
+      "node_modules/**",
+      ".turbo/**",
+      "dist/**",
+      "build/**"
+    ]
+  },
   "compaction": {
     "auto": true,
-    "prune": true,
-    "reserved": 16000
   },
-  "watcher": {
-    "ignore": [".git/**", "node_modules/**", ".turbo/**", "dist/**", "build/**"]
+  "mcp": {
+    "codegraph": {
+      "type": "local",
+      "command": [
+        "codegraph",
+        "serve",
+        "--mcp"
+      ],
+      "enabled": false
+    }
   },
-  "command": {},
-  "plugin": ["oh-my-openagent@latest", "./plugins/effect-ts.ts", "./plugins/local-bin-path.ts"]
+  "plugin": [
+    "@plannotator/opencode@latest",
+    "oh-my-opencode-slim@2.2.17",
+    "./plugins/local-bin-path.ts",
+    "./plugins/effect-ts.ts"
+  ],
+  "agent": {
+    "explore": {
+      "disabled": true
+    },
+    "plan": {
+      "disabled": true
+    },
+    "general": {
+      "disabled": true
+    }
+  },
 }
