@@ -1,5 +1,4 @@
-import type { Plugin } from "@opencode-ai/plugin"
-import { tool } from "@opencode-ai/plugin"
+import { Plugin } from "@opencode-ai/plugin"
 import * as fs from "node:fs"
 import * as path from "node:path"
 
@@ -36,6 +35,20 @@ const PATTERNS: Record<string, { match: RegExp[]; label: string }> = {
     match: [/Scope\.make/, /Scope\.extend/, /Effect\.forkDaemon/, /Effect\.forkScoped/, /Command\.start/],
     label: "Processes & Scopes",
   },
+}
+
+const SYSTEM_HINT =
+  "This project uses Effect v4. Load the effect-ts skill for best practices. " +
+  "Key conventions: ServiceMap.Service (not Effect.Service), " +
+  "Schema.TaggedErrorClass for errors, Effect.gen + Effect.fn for " +
+  "effectful code, Layer.effect/sync for implementations, Schema.brand " +
+  "for entity IDs, Effect.catchTag for error recovery."
+
+type ScaffoldType = "service" | "schema" | "error" | "test"
+
+interface ScaffoldInput {
+  type: ScaffoldType
+  name: string
 }
 
 function detectEffectProject(cwd: string): boolean {
@@ -173,47 +186,53 @@ describe("${name}", () => {
 })`
 }
 
-export const EffectTsPlugin: Plugin = async ({ directory }) => {
-  let isEffectProject = false
-  const injectedHints = new Set<string>()
+export default Plugin.define({
+  id: "effect-ts",
 
-  try {
-    isEffectProject = detectEffectProject(directory)
-  } catch {
-    isEffectProject = false
-  }
+  async setup(ctx) {
+    const projectDirectory = ctx.location.project.directory
+    const injectedHints = new Set<string>()
 
-  return {
-    event: async ({ event }) => {
-      if (event.type === "session.created") {
-        try {
-          isEffectProject = detectEffectProject(directory)
-        } catch {
-          isEffectProject = false
-        }
+    // V2 replacement for V1 "experimental.chat.system.transform". Pushes a
+    // single hint onto the assembled system instructions before each model
+    // dispatch. Lazy project detection handles the case where dependencies
+    // are added after plugin load.
+    await ctx.session.hook("context", (event) => {
+      if (!detectEffectProject(projectDirectory)) return
+      event.system.push({ type: "text", text: SYSTEM_HINT })
+    })
+
+    // V2 replacement for V1 "tool.execute.after" on the read tool. Handles
+    // both string and array content shapes since the published Tool.Result
+    // permits either. Replaces event.result rather than mutating its fields.
+    await ctx.tool.hook("execute.after", (event) => {
+      if (event.tool !== "read") return
+      if (event.status !== "completed") return
+      if (!detectEffectProject(projectDirectory)) return
+
+      const resultContent = event.result.content
+
+      if (typeof resultContent !== "string" && !Array.isArray(resultContent)) {
+        return
       }
-    },
 
-    "experimental.chat.system.transform": async (_input, output) => {
-      if (!isEffectProject) return
+      const text =
+        typeof resultContent === "string"
+          ? resultContent
+          : resultContent
+              .filter(
+                (part): part is { type: "text"; text: string } =>
+                  part.type === "text",
+              )
+              .map((part) => part.text)
+              .join("\n")
 
-      output.system.push(
-        "This project uses Effect v4. Load the effect-ts skill for best practices. " +
-        "Key conventions: ServiceMap.Service (not Effect.Service), Schema.TaggedErrorClass for errors, " +
-        "Effect.gen + Effect.fn for effectful code, Layer.effect/sync for implementations, " +
-        "Schema.brand for entity IDs, Effect.catchTag for error recovery."
+      if (text.length < 50) return
+
+      const patterns = detectPatterns(text)
+      const newPatterns = patterns.filter(
+        (pattern) => !injectedHints.has(pattern),
       )
-    },
-
-    "tool.execute.after": async (input, output) => {
-      if (!isEffectProject || input.tool !== "read") return
-      if (!output.output || typeof output.output !== "string") return
-
-      const content = output.output
-      if (content.length < 50) return
-
-      const patterns = detectPatterns(content)
-      const newPatterns = patterns.filter((p) => !injectedHints.has(p))
 
       if (newPatterns.length === 0) return
 
@@ -222,43 +241,67 @@ export const EffectTsPlugin: Plugin = async ({ directory }) => {
         injectedHints.add(pattern)
       }
 
-      output.output =
-        content +
+      const hint =
         "\n\n[Effect patterns detected: " +
         toInject.join(", ") +
         ". Load the effect-ts skill for reference.]"
-    },
 
-    tool: {
-      effect_scaffold: tool({
+      event.result = {
+        ...event.result,
+        content:
+          typeof resultContent === "string"
+            ? resultContent + hint
+            : [
+                ...resultContent,
+                {
+                  type: "text",
+                  text: hint,
+                },
+              ],
+      }
+    })
+
+    // V2 replacement for V1 tool: { effect_scaffold: tool({...}) }.
+    await ctx.tool.transform((editor) => {
+      editor.add({
+        name: "effect_scaffold",
         description:
           "Generate idiomatic Effect v4 boilerplate. Creates service, schema, error, or test scaffolds following effect-solutions best practices.",
-        args: {
-          type: tool.schema.enum(["service", "schema", "error", "test"]).describe("Type of scaffold to generate"),
-          name: tool.schema.string().describe("Name for the generated type/service (PascalCase)"),
+        input: {
+          type: "object",
+          properties: {
+            type: {
+              type: "string",
+              enum: ["service", "schema", "error", "test"],
+              description: "Type of scaffold to generate",
+            },
+            name: {
+              type: "string",
+              description:
+                "Name for the generated type or service in PascalCase",
+            },
+          },
+          required: ["type", "name"],
+          additionalProperties: false,
         },
-        async execute(params) {
-          let scaffold: string
-          switch (params.type) {
-            case "service":
-              scaffold = generateServiceScaffold(params.name)
-              break
-            case "schema":
-              scaffold = generateSchemaScaffold(params.name)
-              break
-            case "error":
-              scaffold = generateErrorScaffold(params.name)
-              break
-            case "test":
-              scaffold = generateTestScaffold(params.name)
-              break
-          }
+        execute: async (input) => {
+          const { type, name } = input as ScaffoldInput
+
+          const scaffold =
+            type === "service"
+              ? generateServiceScaffold(name)
+              : type === "schema"
+                ? generateSchemaScaffold(name)
+                : type === "error"
+                  ? generateErrorScaffold(name)
+                  : generateTestScaffold(name)
+
           return {
-            output: scaffold,
-            metadata: { type: params.type, name: params.name },
+            content: scaffold,
+            metadata: { type, name },
           }
         },
-      }),
-    },
-  }
-}
+      })
+    })
+  },
+})
