@@ -1,1 +1,5 @@
 skill/*
+
+# opencode2 runtime state (auto-managed by `opencode2 service`)
+service.json
+.oh-my-opencode-slim/
